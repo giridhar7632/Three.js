@@ -47,18 +47,9 @@
 
       // lights
       const light = new THREE.AmbientLight(0xffffff, 1)
-      light.position.x = 2
-      light.position.y = 3
-      light.position.z = 4
       scene.add(light)
 
       // light controls
-      const posFolder = gui.addFolder('Position of Light')
-      posFolder.add(light.position, 'x', 1, 10, 0.1)
-      posFolder.add(light.position, 'y', 1, 10, 0.1)
-      posFolder.add(light.position, 'z', 1, 10, 0.1)
-      posFolder.open()
-
       const lightColor = {
         color: light.color.getHex(),
       }
