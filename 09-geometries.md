@@ -91,3 +91,98 @@ const sphere = new THREE.SphereGeometry(
 
 ## Cylinder Geometry
 
+To create a cylinder in Three.js, you can use the `Three.CylinderGeometry`.
+
+- `radiusTop` - Radius of the cylinder at the top. Default is `1`.
+- `radiusBottom` - Radius of the cylinder at the bottom. Default is `1`.
+- `height` - Height of the cylinder. Default is `1`.
+- `radialSegments` - the number of segments around the circumference of the cylinder. Default is `8`.
+- `heightSegments` - Number of rows of faces along the height of the cylinder. Default is `1`.
+- `openEnded` - It's a Boolean indicating whether the ends of the cylinder are open or not. Default is `false`, meaning closed.
+- `thetaStart` - Start angle for first segment, defaults to `0`.
+- `thetaLength` - The central angle, often called `theta`, of the circular sector. The default is `2* Math.PI`, which makes for a complete cylinder.
+
+```js
+const cylinder = new THREE.CylinderGeometry(
+    radiusTop, radiusBottom, height,
+    radialSegments, heightSegments,
+    openEnded,
+    thetaStart, thetaLength)
+```
+
+## Cone Geometry
+
+You can use `THREE.ConeGeometry` to create a cone. It is very similar to `CylinderGeometry`, except it only allows you to set the `radius` instead of `radiusTop` and `radiusBottom`.
+
+```js
+const cone = new THREE.ConeGeometry(
+    radius, height,
+    radialSegments, heightSegments,
+    openEnded,
+    thetaStart, thetaLength)
+```
+
+## Torus Geometry
+
+Torus is a tube-like shape that looks like a donut. You can use `THREE.TorusGeometry` to create a torus in Three.js. The arguments, `radialSegments` and `tubularSegments` are the number of segments along the radius and tube respectively. With `arc` property, you can control whether the torus has drawn a full circle.
+
+```js
+const torus = new THREE.TorusGeometry(
+    radius, tubeRadius,
+    radialSegments, tubularSegments,
+    arc)
+```
+
+## TorusKnot Geometry
+
+A torus-knot is a special kind of knot that looks like a tube that winds around itself a couple of times. You can create a torus-knot using `THREE.TorusKnotGeometry`. It's pretty similar to `TorusGeometry` with additional properties, the `p` and `q`.
+
+- `p` - It defines how many times the geometry winds around its axis of rotational symmetry. Default is `2`.
+- `q` - It defines how many times the geometry winds around the interior of torus. This defaults to `3`.
+
+```js
+const torusKnot = new THREE.TorusKnotGeometry(
+    radius, tubeRadius, 
+    tubularSegments, radialSegments, 
+    p, q)
+```
+
+## Polyhedron Geometry
+
+A polyhedron is a geometry that has only flat faces and straight edges. You can draw different types of polyhedrons by specifing `vertices` and `indices`.
+
+- `vertices` - Array of points that make up the polyhedron.
+- `indices` - Array of indices that make up the faces from the vertices.
+- `radius` - The radius of the final shape. This defaults to `1`.
+- `detail` - How many levels to subdivide the geometry. The more detail, the smoother the shape.
+
+The following code creates a tetrahedron, which is a polyhedron with `4` faces.
+
+```js
+const vertices = [
+    1, 1, 1,
+    -1, -1, 1,
+    -1, 1, -1,
+    1, -1, -1
+  ]
+
+const indices = [
+    2, 1, 0,
+    0, 3, 2,
+    1, 3, 0,
+    2, 3, 1
+  ]
+
+const geometry = new THREE.PolyhedronGeometry(vertices, indices, radius, detail)
+```
+
+Three.js also has geometries for some common polyderons.
+
+|Polyhedron| no. of faces|code|
+|-----|-----|-----|
+|Tetrahedron| 4 | `THREE.TetrahedronGeometry`|
+|Octahedron| 8 | `THREE.OctahedronGeometry`|
+|Dodecahedron| 12 | `THREE.DodecahedronGeometry`|
+|Icosahedron| 20 | `THREE.IcosahedronGeometry`|
+
+Learn more about geometries [here](https://threejs.org/docs/#api/en/geometries/BoxGeometry).
