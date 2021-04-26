@@ -23,6 +23,8 @@ Play around with the code in this example with different colors and intensities.
 
 Directional light comes from a specific point and is emitted directly from far away to the target. All the light rays it sends out are parallel to each other. A good example of this is the sun.
 
+![Directional Light]()
+
 ```js
 const light = THREE.DirectionalLight(color, intensity)
 light.position.set(2, 3, 4)
@@ -85,20 +87,67 @@ Explore more in this example.
 
 This is another kind of light which comes from a specific direction in the shape of the cone.
 
+![Spot-light]()
+
 - `distance` - Maximum range of the light. Default is `0` (no limit).
 - `angle` - Maximum angle of light dispersion from its direction whose upper bound is `Math.PI/2`.
 - `penumbra` - Percent of the spotlight cone that is attenuated due to penumbra. Takes values between zero and `1`. Default is `0`.
--``decay` - The amount the light dims along the distance of the light.
+- `decay` - The amount the light dims along the distance of the light.
 
 ```js
-const spotLight = new THREE.SpotLight( 0xffffff )
-spotLight.position.set( 1, 10, 10)
+const light = new THREE.SpotLight( color, intensity )
+light.position.set( 1, 10, 10)
 
-spotLight.castShadow = true
+light.castShadow = true
 
-spotLight.shadow.camera.near = 5
-spotLight.shadow.camera.far = 400
-spotLight.shadow.camera.fov = 30
+light.shadow.camera.near = 5
+light.shadow.camera.far = 400
+light.shadow.camera.fov = 30
 ```
 
 The area where shadows can appear is defined with the `shadow.camera.near`, `shadow.camera.far`, and `shadow.camera.fov` properties.
+
+Example.
+
+## Point Light
+
+Point light is a light source that emits light in all directions from a single point. It is a very similar to light bulb in normal world. It can cast shadows because it is a type of directional light.
+
+![point Light]
+
+```js
+const light =  new THREE.PointLight(color, intensity, distance, decay)
+
+light.castShadow = true
+
+light.shadow.camera.near = 0.5 // default
+light.shadow.camera.far = 500 // default
+```
+
+Example.
+
+## Hemisphere Light
+
+This is a special light for creating natural lighting. If you look at the lighting outside, you'll see that the lights don't really come from a single direction. Part of the sunlight is reflected by Earth, and other parts are scattered by the atmosphere. The result is a very soft light coming from lots of directions. In Three.js, we can create something similar using `THREE.HemisphereLight`.
+
+```js
+const light = new THREE.HemisphereLight(color, groundColor, intensity)
+```
+
+The first argument sets the color of the sky, and the second color sets the color reflected from the floor. And the last argument is its intensity.
+
+Most often it is used along with some other lights, which can cast shadows for best outdoor-lighting effect.
+
+Example.
+
+## RectArea Light
+
+With `THREE.RectAreaLight`, we can define a rectangular area that emits light.
+
+```js
+const light = new THREE.RectAreaLight( color, intensity,  width, height )
+```
+
+Explore more in this example.
+
+Experiment with the examples of each light and try to understand clearly.
