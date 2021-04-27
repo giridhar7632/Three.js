@@ -74,7 +74,7 @@ Orbit controls allows the camera to orbit around a center of the scene. You can 
 1. Create the new instance of the orbit controls and pass the camera.
 
 ```js
-const controls = new OrbitControls(camera, render.domElement)
+const controls = new THREE.OrbitControls(camera, render.domElement)
 ```
 
 1. Update the controls for every frame. You can simply do it in your animation loop.
@@ -97,7 +97,33 @@ There are many other settings to make your experience better. The code is well-d
 TrackballControls is similar to OrbitControls. However, it does not maintain a constant camera up vector. That means that the camera can orbits past it's polar extremes. It won't flip to stay the right side up. You can add it just like the pervious one.
 
 ```js
-const controls = new TrackballControls(camera, render.domElement)
+const controls = new THREE.TrackballControls(camera, render.domElement)
 ```
 
-###
+### Fly controls
+
+These are flight simulator-like controls. Move and steer with the keyboard and the mouse. You can arbitrarily transform the camera in 3D space without any limitations (e.g. focus on a specific target).
+
+```js
+const controls = new THREE.FlyControls(camera, render.domElement)
+```
+
+### PointerLock controls
+
+The `PointerLockControls` implements the inbuilt browsers [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API). It allows you to control the camera just like in a first-person in 3D games.
+
+```js
+const controls = new PointerLockControls( camera, document.body );
+
+// add event listener to show/hide a UI (e.g. the game's menu)
+controls.addEventListener( 'lock', function () {
+	menu.style.display = 'none';
+} )
+controls.addEventListener( 'unlock', function () {
+	menu.style.display = 'block';
+} )
+```
+
+This is a simple 3D game created using PointerLock controls.
+
+We have seen the most useful controls in this chapter. Some developers are creatingmore useful controls for Three.js. You can see some other contols [here](https://github.com/mrdoob/three.js/blob/master/examples/js/controls) well documented and easy to use.
