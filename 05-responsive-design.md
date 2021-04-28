@@ -8,11 +8,11 @@ When you resize the browser, we have to notify the Three.js so that it knows how
 
 ```js
 window.addEventListener('resize', () => {
-  // update width and height
+  // update display width and height
   width = window.innerWidth
   height = window.innerHeight
 
-  // update camera
+  // update camera aspect
   camera.aspect = width / height
   camera.updateProjectionMatrix()
 
@@ -23,11 +23,17 @@ window.addEventListener('resize', () => {
 })
 ```
 
+The above code creates responsiveness to your Three.js project.
+
 ## Anti-aliasing
 
-We can turn on anti-aliasing by passing a single new parameter into the `WebGLRenderer` constructor. As with the `MeshStandardMaterial`, the `WebGLRenderer` constructor takes a specification object with named parameters. Here, we will set the antialias parameter to true:
+> The **aliasing effect** is the appearance of jagged edges or "jaggies"(also known as stair-stepped lines) on edges and objects (rendered using pixels).
+
+We can turn on anti-aliasing by setting `antialias` property of the `WebGLRenderer` to `true`, by default it is se to `false`. Here, we will set the `antialias` parameter to `true`:
 
 ```js
 const renderer = new WebGLRenderer({ antialias: true })
 renderer.physicallyCorrectLights = true
 ```
+
+The property `physicallyCorrectLights` tells Three.js whether to use physically correct lighting mode. Default is `false`. Setting it to `true` will help increase in detail of the object.
