@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+          Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      html,
+      body {
+        height: 100vh;
+        width: 100vw;
+      }
+      #threejs-container {
+        position: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script src="../scripts/three.min.js"></script>
+    <script src="../scripts/dat.gui.min.js"></script>
+  </head>
+  <body>
+    <div id="threejs-container"></div>
+    <script type="module">
+      // sizes
+      let width = window.innerWidth
+      let height = window.innerHeight
+
+      // scene
+      const scene = new THREE.Scene()
+      scene.background = new THREE.Color(0x262626)
+
+      // camera
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
+      camera.position.set(0, 0, 50)
+      camera.lookAt(0, 0, 0)
+
+      // Line
+      const points = []
+      points.push(new THREE.Vector3(-10, 0, 0))
+      points.push(new THREE.Vector3(0, -20, 0))
+      points.push(new THREE.Vector3(10, 0, 0))
+
+      const geometry = new THREE.BufferGeometry().setFromPoints(points)
+      const material = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        linewidth: 1,
+        scale: 1,
+        dashSize: 3,
+        gapSize: 2
+      })
+      const line = new THREE.Line(geometry, material)
+      line.position.set(0, 10, 0)
+      scene.add(line)
+
+      // responsiveness
+      window.addEventListener('resize', () => {
+        width = window.innerWidth
+        height = window.innerHeight
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer.render(scene, camera)
+      })
+
+      // renderer
+      const renderer = new THREE.WebGL1Renderer()
+      renderer.setSize(width, height)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+      // animation
+      function animate() {
+        requestAnimationFrame(animate)
+
+        renderer.render(scene, camera)
+      }
+
+      // rendering the scene
+      const container = document.querySelector('#threejs-container')
+      container.append(renderer.domElement)
+      renderer.render(scene, camera)
+      animate()
+    </script>
+  </body>
+</html>
