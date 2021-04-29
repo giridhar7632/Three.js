@@ -101,4 +101,4 @@ scene.add(mesh)
 
 Now you can see the text rendered to the scene.
 
-You can add custom fonts by using their `typeface` files. You can find some at [http://typeface.neocracy.org/fonts.html](http://typeface.neocracy.org/fonts.html).
+You can add custom fonts by using their `typeface` files. You can find some at [http://typeface.neocracy.org/fonts.html](http://typeface.neocracy.org/fonts.html). You can add different textures to the text just like we added to other materials.
