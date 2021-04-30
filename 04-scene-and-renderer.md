@@ -34,6 +34,10 @@ console.log(scene.children.length) // outputs number of elements on the scene
 
 > **Note:** we can give a name to any object using its `name` attribute. A name is very useful for debugging purposes but can also be used to directly access an object from your scene.
 
+Check out this [example](/examples/04-scene-and-renderer/01-scene.html). Check the console to see the object in the scene.
+
+![scene children](/assests/04-scene-add.png)
+
 ### Using name attribute
 
 The function `scene.getObjectByName(name)` directly returns the object, by specific name, from the scene.
@@ -77,7 +81,7 @@ Here, all the objects on the scene will be of the same material i.e., `MeshLambe
 
 > **Note:** `THREE.Scene` is a structure that is sometimes also called a **Scenegraph**. A scene graph is a structure that can hold all the necessary information of a graphical scene. In Three.js, this means that `THREE.Scene` contains all the objects, lights, and other objects necessary for rendering.
 
-![Scenegraph]()
+![Scenegraph](/assests/04-scenegraph.png)
 
 ## Renderer
 

@@ -44,7 +44,9 @@ Then you can add the parameter you want to control and the variable. For example
 gui.add(cube.position, 'y')
 ```
 
-Try adding other position variables. Refer to this working code example.
+Try adding other position variables. Refer to this working [code example](/examples/06-debug-and-stats/01-cube.html).
+
+![Cube positions](/assests/06-controls.png)
 
 You can customize the label displayed using the `name` attribute. To change the label on the variable line, use `.name("your label")`.
 

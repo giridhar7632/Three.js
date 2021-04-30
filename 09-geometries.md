@@ -20,7 +20,7 @@ const plane = new THREE.PlaneGeometry(
 )
 ```
 
-Example: [Plane Geometry]()
+Example: [Plane Geometry](/assests/09-geometries/01-plane.html)
 
 ## Circle Geometry
 
@@ -38,7 +38,7 @@ const circle = new THREE.CircleGeometry(
 )
 ```
 
-Example: [Circle Geometry]()
+Example: [Circle Geometry](/assests/09-geometries/02-circle.html)
 
 ## Ring Geometry
 
@@ -59,7 +59,7 @@ const ring = new THREE.RingGeometry(
   )
 ```
 
-Example: [Ring Geometry]()
+Example: [Ring Geometry](/assests/09-geometries/03-ring.html)
 
 ## Box Geometry
 
@@ -72,8 +72,7 @@ const box = new THREE.CubeGeometry(
   )
 ```
 
-Example: [Rubix cube]()
-In this example, I created a Rubix cube using Three.js.
+Example: [Cube geometry](/assests/09-geometries/04-cube.html)
 
 ## Sphere Geometry
 
@@ -95,6 +94,8 @@ const sphere = new THREE.SphereGeometry(
     thetaStart, thetaLength
   )
 ```
+
+Example: [Sphere Geometry](/assests/09-geometries/05-sphere.html)
 
 ## Cylinder Geometry
 
@@ -118,6 +119,8 @@ const cylinder = new THREE.CylinderGeometry(
   )
 ```
 
+Example: [Cylinder Geometry](/assests/09-geometries/06-cylinder.html)
+
 ## Cone Geometry
 
 You can use `THREE.ConeGeometry` to create a cone. It is very similar to `CylinderGeometry`, except it only allows you to set the `radius` instead of `radiusTop` and `radiusBottom`.
@@ -131,6 +134,8 @@ const cone = new THREE.ConeGeometry(
   )
 ```
 
+Example: [Cone Geometry](/assests/09-geometries/07-cone.html)
+
 ## Torus Geometry
 
 Torus is a tube-like shape that looks like a donut. You can use `THREE.TorusGeometry` to create a torus in Three.js. The arguments, `radialSegments` and `tubularSegments` are the number of segments along the radius and tube respectively. With `arc` property, you can control whether the torus has drawn a full circle.
@@ -142,6 +147,8 @@ const torus = new THREE.TorusGeometry(
     arc
   )
 ```
+
+Example: [Torus Geometry](/assests/09-geometries/08-torus.html)
 
 ## TorusKnot Geometry
 
@@ -157,6 +164,8 @@ const torusKnot = new THREE.TorusKnotGeometry(
     p, q
   )
 ```
+
+Example: [Torus knot Geometry](/assests/09-geometries/09-torus-knot.html)
 
 ## Polyhedron Geometry
 
@@ -186,6 +195,8 @@ const indices = [
 
 const geometry = new THREE.PolyhedronGeometry(vertices, indices, radius, detail)
 ```
+
+Example: [Polyhedron Geometry](/assests/09-geometries/10-polyhedron.html)
 
 Three.js also has geometries for some common polyderons.
 

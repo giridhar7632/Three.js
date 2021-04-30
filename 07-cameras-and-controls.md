@@ -28,7 +28,7 @@ The `far` property defines how far the camera can see from the position of the c
 
 > **Good default:** `1000 `
 
-![prespective camera]()
+![prespective camera](/assests/07-prespective-cam.png)
 
 ### OrthographicCamera
 
@@ -47,7 +47,7 @@ All the six attributes are the borders of the box, only the objects that are ins
 - `near` - Camera near plane.
 - `far` - Camera far plane.
 
-![orthographic camera]()
+![orthographic camera](/assests/07-orthographic-cam.png)
 
 ### Making the camera follow an object
 

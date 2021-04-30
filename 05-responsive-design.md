@@ -27,7 +27,13 @@ The above code creates responsiveness to your Three.js project.
 
 ## Anti-aliasing
 
+![Aliasing effect](/assests/05-anti-aliasing.jpg)
+
 > The **aliasing effect** is the appearance of jagged edges or "jaggies"(also known as stair-stepped lines) on edges and objects (rendered using pixels).
+
+Aliasing in our `Hello cube` app.
+
+![Aliasing in our hello-cube-app](./assests/05-alias.png)
 
 We can turn on anti-aliasing by setting `antialias` property of the `WebGLRenderer` to `true`, by default it is set to `false`. Here, we will set the `antialias` parameter to `true`:
 
@@ -35,5 +41,9 @@ We can turn on anti-aliasing by setting `antialias` property of the `WebGLRender
 const renderer = new WebGLRenderer({ antialias: true })
 renderer.physicallyCorrectLights = true
 ```
+
+After `anti-aliasing`, it looks like this.
+
+![After antialiasing](./assests/05-anti-alias.png)
 
 The property `physicallyCorrectLights` tells Three.js whether to use physically correct lighting mode. Default is `false`. Setting it to `true` will help increase the detail of the object.

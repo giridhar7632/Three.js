@@ -163,6 +163,8 @@ const timesToRepeatVertically = 2
 texture.repeat.set(timesToRepeatHorizontally, timesToRepeatVertically)
 ```
 
+![checker-board]()
+
 ### Adding depth to the scene
 
 You can add the effect of depth using a `bump map` or `normal map` or `distance map`.

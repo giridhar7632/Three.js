@@ -17,13 +17,13 @@ This is the most basic light, which illuminates the whole scene equally. Light i
 const light = THREE.AmbientLight(color, intensity)
 ```
 
-Play around with the code in this example with different colors and intensities.
+Play around with the code in this [example](/examples/08-lights/01-ambient.html) with different colors and intensities.
 
 ## Directional Light
 
 Directional light comes from a specific point and is emitted directly from far away to the target. All the light rays it sends out are parallel to each other. A good example of this is the sun.
 
-![Directional Light]()
+![Directional Light](/assests/08-directional-light.png)
 
 ```js
 const light = THREE.DirectionalLight(color, intensity)
@@ -87,7 +87,7 @@ Explore more in this example.
 
 This is another kind of light that comes from a specific direction in the shape of the cone.
 
-![Spot-light]()
+![Spot-light](/assests/08-spot-light.png)
 
 - `distance` - Maximum range of the light. Default is `0` (no limit).
 - `angle` - Maximum angle of light dispersion from its direction whose upper bound is `Math.PI/2`.
@@ -113,7 +113,7 @@ Example.
 
 Point light is a light source that emits light in all directions from a single point. It is very similar to the light bulb in the normal world. It can cast shadows because it is a type of directional light.
 
-![point Light]
+![point Light](/assests/08-point-light.png)
 
 ```js
 const light = new THREE.PointLight(color, intensity, distance, decay)

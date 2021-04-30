@@ -157,8 +157,10 @@ Last but not least, we add the renderer element to our HTML document. This is an
 
 ### The Result
 
-The output looks like this if everything is working properly. Play around with the code to get a better understanding of how it works.
+The output looks like this if everything is working properly.
 
-![Cube app]()
+![Cube app](/assests/03-hello-cube.png)
+
+Check out this [example](/examples/03-hello-cube-app.html), play around with the code to get a better understanding of how it works.
 
 You have now completed creating your first three.js application. Let's go ahead and add more beauty to the app.
