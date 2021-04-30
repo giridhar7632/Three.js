@@ -18,23 +18,23 @@
         height: 100vh;
         width: 100vw;
       }
-      #container {
+      #threejs-container {
         position: block;
         width: 100%;
         height: 100%;
       }
     </style>
-    <script src="/scripts/three.min.js"></script>
-    <script src="/scripts/dat.gui.min.js"></script>
+    <script src="../scripts/three.min.js"></script>
+    <script src="../scripts/dat.gui.min.js"></script>
   </head>
   <body>
-    <div id="container"></div>
+    <div id="threejs-container"></div>
     <script type="module">
       const gui = new dat.GUI()
 
       // width, height
-      const width = window.innerWidth
-      const height = window.innerHeight
+      let width = window.innerWidth
+      let height = window.innerHeight
 
       // scene
       const scene = new THREE.Scene()
@@ -52,10 +52,11 @@
       scene.add(ambientLight)
 
       const pointLight = new THREE.PointLight(0xffffff, 0.2)
-      //const helper = new THREE.PointLightHelper(pointLight)
+
       pointLight.position.x = 2
       pointLight.position.y = 3
       pointLight.position.z = 4
+
       scene.add(pointLight)
 
       // plane
@@ -103,6 +104,8 @@
 
       // responsiveness
       window.addEventListener('resize', () => {
+        width = window.innerWidth
+        height = window.innerHeight
         camera.aspect = width / height
         camera.updateProjectionMatrix()
 
@@ -126,7 +129,7 @@
       }
 
       // rendering the scene
-      const container = document.querySelector('#container')
+      const container = document.querySelector('#threejs-container')
       container.append(renderer.domElement)
       renderer.render(scene, camera)
       animate()

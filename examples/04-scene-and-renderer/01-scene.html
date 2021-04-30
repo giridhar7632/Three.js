@@ -56,8 +56,8 @@
     <div id="threejs-container"></div>
     <script type="module">
       // sizes
-      const width = window.innerWidth
-      const height = window.innerHeight
+      let width = window.innerWidth
+      let height = window.innerHeight
 
       const gui = new dat.GUI()
 
@@ -139,6 +139,8 @@
 
       // responsiveness
       window.addEventListener('resize', () => {
+        width = window.innerWidth
+        height = window.innerHeight
         camera.aspect = width / height
         camera.updateProjectionMatrix()
 
@@ -154,9 +156,6 @@
       // animation
       function animate() {
         requestAnimationFrame(animate)
-
-        //cube.rotation.x += 0.005
-        //cube.rotation.y += 0.01
 
         renderer.render(scene, camera)
       }

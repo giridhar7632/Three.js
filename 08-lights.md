@@ -2,19 +2,19 @@
 
 ## Lights
 
-Lights make the objects visible. Similarly, in Three.js `THREE.Light` lights up the scene and make some objects visible. Not all materials are affected by lighting. The `MeshBasicMaterial` and `MeshNormalMaterial` are self illuminating so they don't need lighting to be visible within a scene, but most of the other materials do, such as the `MeshLambertMaterial`, `MeshPhongMaterial`, `MeshStandardMaterial`, `MeshPhysicalMaterial` and `MeshToonMaterial`. We'll discuss more about materials in further chapters. In this chapter, we'll focus on different types of lights in Three.js.
+Lights make the objects visible. Similarly, in Three.js `THREE.Light` lights up the scene and make some objects visible. Not all materials are affected by lighting. The `MeshBasicMaterial` and `MeshNormalMaterial` are self-illuminating so they don't need lighting to be visible within a scene, but most of the other materials do, such as the `MeshLambertMaterial`, `MeshPhongMaterial`, `MeshStandardMaterial`, `MeshPhysicalMaterial` and `MeshToonMaterial`. We'll discuss more materials in further chapters. In this chapter, we'll focus on different types of lights in Three.js.
 
-Every light have `color` and `intensity` properties.
+Every light has `color` and `intensity` properties.
 
 - `color` - (optional) hexadecimal color of the light. Default is 0xffffff (white).
 - `intensity` - (optional) numeric value of the light's strength/intensity. Default is 1.
 
 ## Ambient Light
 
-This is the most basic light, which illuminates the whole scene equally. Light is spread equally in all directions and distances, so it cannot cast shadows. Ambient light affects all lit objects in the scene equally, and it's color is added to the color of an object's material.
+This is the most basic light, which illuminates the whole scene equally. Light is spread equally in all directions and distances, so it cannot cast shadows. Ambient light affects all lit objects in the scene equally, and its color is added to the color of an object's material.
 
 ```js
-const light = THREE.AmbientLight(color, intensity) 
+const light = THREE.AmbientLight(color, intensity)
 ```
 
 Play around with the code in this example with different colors and intensities.
@@ -32,7 +32,7 @@ light.position.set(2, 3, 4)
 
 ### Casting Shadows
 
-Light that is coming from a specific direction cast shadows. First, we should make the scene ready for casting shadows.
+The light that is coming from a specific direction cast shadows. First, we should make the scene ready for casting shadows.
 
 #### Step - 1
 
@@ -42,9 +42,9 @@ We should first tell the renderer that we want to enable shadows. Casting shadow
 renderer.shadowMapEnabled = true
 ```
 
-This tells renderer to cast shadows in the scene.
+This tells the renderer to cast shadows in the scene.
 
-> Three.js by default uses shadow maps. The way a shadow map works is, for every light that casts shadows all objects marked to cast shadows are rendered from the point of view of the light.
+> Three.js by default uses shadow maps. A shadow map works is, for every light that casts shadows all objects marked to cast shadows are rendered from the point of view of the light.
 
 If your shadow looks a bit blocky around its edges, it means the shadow map is too small. To increase the shadow map size. You can define `shadowMapHeight` and `shadowMapWidht` properties for the light. Alternatively, you can also try to change the `shadowMapType` property of `WebGLRenderer`. You can set this to `THREE.BasicShadowMap`, `THREE.PCFShadowMap`, or `THREE.PCFSoftShadowMap`.
 
@@ -85,18 +85,18 @@ Explore more in this example.
 
 ## Spotlight
 
-This is another kind of light which comes from a specific direction in the shape of the cone.
+This is another kind of light that comes from a specific direction in the shape of the cone.
 
 ![Spot-light]()
 
 - `distance` - Maximum range of the light. Default is `0` (no limit).
 - `angle` - Maximum angle of light dispersion from its direction whose upper bound is `Math.PI/2`.
 - `penumbra` - Percent of the spotlight cone that is attenuated due to penumbra. Takes values between zero and `1`. Default is `0`.
-- `decay` - The amount the light dims along the distance of the light.
+- `decay` - The amount the light dims along with the distance of the light.
 
 ```js
-const light = new THREE.SpotLight( color, intensity )
-light.position.set( 1, 10, 10)
+const light = new THREE.SpotLight(color, intensity)
+light.position.set(1, 10, 10)
 
 light.castShadow = true
 
@@ -111,12 +111,12 @@ Example.
 
 ## Point Light
 
-Point light is a light source that emits light in all directions from a single point. It is a very similar to light bulb in normal world. It can cast shadows because it is a type of directional light.
+Point light is a light source that emits light in all directions from a single point. It is very similar to the light bulb in the normal world. It can cast shadows because it is a type of directional light.
 
 ![point Light]
 
 ```js
-const light =  new THREE.PointLight(color, intensity, distance, decay)
+const light = new THREE.PointLight(color, intensity, distance, decay)
 
 light.castShadow = true
 
@@ -128,7 +128,7 @@ Example.
 
 ## Hemisphere Light
 
-This is a special light for creating natural lighting. If you look at the lighting outside, you'll see that the lights don't really come from a single direction. Part of the sunlight is reflected by Earth, and other parts are scattered by the atmosphere. The result is a very soft light coming from lots of directions. In Three.js, we can create something similar using `THREE.HemisphereLight`.
+This is a special light for creating natural lighting. If you look at the lighting outside, you'll see that the lights don't come from a single direction. Part of the sunlight is reflected by Earth, and other parts are scattered by the atmosphere. The result is a very soft light coming from lots of directions. In Three.js, we can create something similar using `THREE.HemisphereLight`.
 
 ```js
 const light = new THREE.HemisphereLight(color, groundColor, intensity)
@@ -136,7 +136,7 @@ const light = new THREE.HemisphereLight(color, groundColor, intensity)
 
 The first argument sets the color of the sky, and the second color sets the color reflected from the floor. And the last argument is its intensity.
 
-Most often it is used along with some other lights, which can cast shadows for best outdoor-lighting effect.
+Most often it is used along with some other lights, which can cast shadows for the best outdoor lighting effect.
 
 Example.
 
@@ -145,7 +145,7 @@ Example.
 With `THREE.RectAreaLight`, we can define a rectangular area that emits light.
 
 ```js
-const light = new THREE.RectAreaLight( color, intensity,  width, height )
+const light = new THREE.RectAreaLight(color, intensity, width, height)
 ```
 
 Explore more in this example.

@@ -2,7 +2,7 @@
 
 ## Materials
 
-Material is like the skin of the object. It defines the outer appearance of the geometry. Three.js provides a lot of materials to work with. We should choose the type of material according to our need. In this chapter we'll discuss about the most comonly used materials in Three.js.
+Material is like the skin of the object. It defines the outer appearance of the geometry. Three.js provides a lot of materials to work with. We should choose the type of material according to our needs. In this chapter, we'll discuss the most commonly used materials in Three.js.
 
 ### MeshBasicMaterial
 
@@ -23,7 +23,7 @@ Sometimes it’s hard to distinguish between two adjacent surfaces of the same c
 
 ### MeshDepthMaterial
 
-This is a material that uses the distance from the camera to determine how to color your mesh in grey scale. White is nearest, black is farthest.
+This is a material that uses the distance from the camera to determine how to color your mesh in a greyscale. White is nearest, black is farthest.
 
 ```js
 const geometry = new THREE.TorusKnotGeometry()
@@ -36,9 +36,9 @@ You can understand better about it's color in this s=example of torus-knot.
 
 ### MeshNormalMaterial
 
-This material uses the magnitude of the x/y/z values of the faces’ normal vectors to calculate and set the red/reen/blue values of the colors displayed on the face.
+This material uses the magnitude of the x/y/z values of the faces’ normal vectors to calculate and set the red/green/blue values of the colors displayed on the face.
 
-> How it works? - x is `red`, y is `green`, and z is `blue` so things facing to the right will be `pink`, to the left will be `aqua`, up will be `light green`, down will be `purple`, and toward the screen will be `lavender`.
+> How does it works? - x is `red`, y is `green`, and z is `blue` so things facing to the right will be `pink`, to the left will be `aqua`, up will be `light green`, down will be `purple`, and toward the screen will be `lavender`.
 
 ```js
 const geometry = new THREE.BoxGeometry(2, 2, 2)
@@ -47,14 +47,14 @@ const material = new THREE.MeshBasicMaterial()
 const cube = new THREE.Mesh(geometry, material)
 ```
 
-In this example, you can see that every face has it's own color based on the normal of the face.
+In this example, you can see that every face has its color based on the normal of the face.
 
 ### MeshLambertMaterial
 
 This material can be used to create dull-looking, non-shiny surfaces. This is a very easy-to-use material that responds to the lighting sources in the scene. It has two main properties:
 
 - `color` - This is the color of the material.
-- `emissive` - This is the color that material emits. You can use this to create objects that looks like they glow.
+- `emissive` - This is the color that the material emits. You can use this to create objects that look like they glow.
 
 ```js
 const geometry = new THREE.BoxGeometry(2, 2, 2)
@@ -65,7 +65,7 @@ const cube = new THREE.Mesh(geometry, material)
 
 ### MeshPhongMaterial
 
-This material is smiliar to `MeshLambertMaterial` but can create more shiny surfaces. If you use this material without any lighting, nothing will be shown, it will be in black color. You can use a white `AmbientLight` to make it visible.
+This material is similar to `MeshLambertMaterial` but can create more shiny surfaces. If you use this material without any lighting, nothing will be shown, it will be in black. You can use a white `AmbientLight` to make it visible.
 
 ```js
 const geometry = new THREE.BoxGeometry(2, 2, 2)
@@ -76,7 +76,7 @@ const cube = new THREE.Mesh(geometry, material)
 
 ### MeshStandardMaterial
 
-It is similar but gives a more accurate and realistic looking result than the `MeshLambertMaterial` or `MeshPhongMaterial`. Insted of `shininess` it has two properties: `roughness` and `metalness`.
+It is similar but gives a more accurate and realistic looking result than the `MeshLambertMaterial` or `MeshPhongMaterial`. Instead of `shininess` it has two properties: `roughness` and `metalness`.
 
 ```js
 const geometry = new THREE.BoxGeometry(2, 2, 2)
@@ -107,7 +107,7 @@ There are many other materials in Three.js. You can learn more [here](https://th
 
 ## Using Multiple Materials
 
-Until now while creating a `Mesh`, you added a sinlgle material to it. There are also cases where you want to combine multiple materials. You can do that by passing an array of materials. But you should not use `Mesh`, instead you can use `createMultipleMaterialObject` of `SceneUtils`. For example, following code combines `THREE.MeshLambertMaterial` with a material that shows you the wireframe of the geometry.
+Until now while creating a `Mesh`, you added a single material to it. There are also cases where you want to combine multiple materials. You can do that by passing an array of materials. But you should not use `Mesh`, instead you can use `createMultipleMaterialObject` of `SceneUtils`. For example, the following code combines `THREE.MeshLambertMaterial` with a material that shows you the wireframe of the geometry.
 
 ```js
 const geometry = new THREE.BoxGeometry(1, 1, 1)
@@ -127,21 +127,20 @@ const cube = THREE.SceneUtils.createMultiMaterialObject(cylinderGeometry, [
 
 ## Textures
 
-Texture ia a image or color added to the material in order to give more detail or beauty. Textures is a large topic in Three.js. In this section we'll see how to apply a basic texture to our material.
+The texture is an image or color added to the material to give more detail or beauty. Texture is a large topic in Three.js. In this section we'll see how to apply a basic texture to our material.
 
-### Basic texture
+## Basic texture
 
 First, you should create a `loader`. Three.js has built-in function `TextureLoader()` to load textures into your Three.js project. Then you can load any texture or image by specifying its path in the `load()` function.
 
-<!-- prettier-ignore -->
 ```js
 const loader = new THREE.TextureLoader()
-texture.load(/path/to/the/image)
+texture.load('/path/to/the/image')
 ```
 
-Then set the map property of material to this texture. That's it, you applied a texture to the plane geometry.
+Then set the map property of the material to this texture. That's it, you applied a texture to the plane geometry.
 
-Textures have settings for repeating, offseting, and rotating a texture. By default textures in three.js do not repeat. To set whether or not a texture repeats there are 2 properties, `wrapS` for horizontal wrapping and `wrapT` for vertical wrapping. And set the reoeating mode to `THREE.ReaptWrapping`.
+Textures have settings for repeating, offsetting, and rotating a texture. By default textures in three.js do not repeat. To set whether a texture repeats there are 2 properties, `wrapS` for horizontal wrapping and `wrapT` for vertical wrapping. And set the repeating mode to `THREE.ReaptWrapping`.
 
 ```js
 texture.wrapS = THREE.RepeatWrapping
@@ -164,37 +163,36 @@ const timesToRepeatVertically = 2
 texture.repeat.set(timesToRepeatHorizontally, timesToRepeatVertically)
 ```
 
-### Adding depth
+### Adding depth to the scene
 
-You can add the effect of depth using `bump map` or `normal map` or `distance map`.
+You can add the effect of depth using a `bump map` or `normal map` or `distance map`.
 
-#### Using `bumpMap`
+## Using `bump map`
 
 A bump map is a grayscale image, where the intensity of each pixel determines the height. You can just set the material `bumpMap` property to the texture. It adds fine details to the texture.
 
-<!-- prettier-ignore -->
 ```js
-const textureBumpMap = new THREE.TextureLoader().load(/path/to/bump-map)
+const textureBumpMap = new THREE.TextureLoader().load('/path/to/bump-map')
 material.bumpMap = textureBumpMap
 ```
 
-#### Using `normalMap`
+## Using `normal maps`
 
 A normal map describes the normal vector for each pixel, which should be used to calculate how light affects the material used in the geometry.
 
-<!-- prettier-ignore -->
 ```js
-const textureNormalMap = new THREE.TextureLoader().load(/path/to/normal-map)
+const textureNormalMap = new THREE.TextureLoader().load('/path/to/normal-map')
 material.normalMap = textureNormalMap
 ```
 
-#### Using `displacementMap`
+## Using `displacement map`
 
-While the bump map and the normal map give an illusion of depth, with a displacement map, we really change the model's shape, based on the information from the texture.
+While the bump map and the normal map give an illusion of depth, we change the model's shape, with a displacement map based on the information from the texture.
 
-<!-- prettier-ignore -->
 ```js
-const textureDisplacementMap = new THREE.TextureLoader().load(/path/to/displacement-map)
+const textureDisplacementMap = new THREE.TextureLoader().load(
+  '/path/to/displacement-map'
+)
 material.displacemetMap = textureDisplacementMap
 ```
 

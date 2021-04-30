@@ -10,8 +10,8 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+          Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       }
       html,
       body {
@@ -24,8 +24,8 @@
         height: 100%;
       }
     </style>
-    <script src="/scripts/three.min.js"></script>
-    <script src="/scripts/dat.gui.min.js"></script>
+    <script src="../scripts/three.min.js"></script>
+    <script src="../scripts/dat.gui.min.js"></script>
   </head>
   <body>
     <div id="container"></div>
@@ -34,8 +34,8 @@
       const gui = new dat.GUI()
 
       // sizes
-      const width = window.innerWidth
-      const height = window.innerHeight
+      let width = window.innerWidth
+      let height = window.innerHeight
 
       // scene
       const scene = new THREE.Scene()
@@ -51,7 +51,7 @@
 
       // light controls
       const lightColor = {
-        color: light.color.getHex(),
+        color: light.color.getHex()
       }
       const lightFolder = gui.addFolder('Ambient Light')
       lightFolder.addColor(lightColor, 'color').onChange(() => {
@@ -64,7 +64,7 @@
       const geometry = new THREE.BoxGeometry(2, 2, 2)
       const material = new THREE.MeshStandardMaterial({
         color: 0xffffff,
-        wireframe: true,
+        wireframe: true
       })
       const materialFolder = gui.addFolder('Material')
       materialFolder.add(material, 'wireframe')
@@ -75,6 +75,8 @@
 
       // responsiveness
       window.addEventListener('resize', () => {
+        width = window.innerWidth
+        height = window.innerHeight
         camera.aspect = width / height
         camera.updateProjectionMatrix()
 

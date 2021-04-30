@@ -1,8 +1,8 @@
 # THREE.JS - GEOMETRIES
 
-Geometries are used to create and define shapes in Three.js. Three.js has many types of built-in geomettries both 2D and 3D.
+Geometries are used to create and define shapes in Three.js. Three.js has many types of built-in geometries both 2D and 3D.
 
-In this chapter, we'll discuss about basic built-in geometries. We’ll first look at the 2D geometries and after that, we’ll explore all the basic 3D geometries that are available.
+In this chapter, we'll discuss basic built-in geometries. We’ll first look at the 2D geometries and after that, we’ll explore all the basic 3D geometries that are available.
 
 ## Plane Geometry
 
@@ -14,7 +14,10 @@ The `THREE.PlaneGeometry` is used to create a simple 2D rectangle. It takes four
 - `heightSegments` - the number of segments the height should be divided into. This defaults to `1`.
 
 ```js
-const plane = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments)
+const plane = new THREE.PlaneGeometry(
+  width, height, 
+  widthSegments, heightSegments
+)
 ```
 
 Example: [Plane Geometry]()
@@ -24,23 +27,26 @@ Example: [Plane Geometry]()
 The `THREE.CircleGeometry` is used to create a simple 2D circle. It takes four arguments and all are optional.
 
 - `radius` - The radius of a circle defines its size. The default value is `1`.
-- `segments` - the number of faces that are used to create the circle. The default value is `8`. The more the segments the a smoother circle is.
+- `segments` - the number of faces that are used to create the circle. The default value is `8`. The more segments the smoother circle is.
 - `thetaStart` - The position from which to start drawing the circle. This value can range from `0` to `2 * PI`, and the default value is `0`.
 - `thetaLength` - This property defines to what extent the circle is completed. The default value is `2 * PI`.
 
 ```js
-const circle = new THREE.CircleGeometry(radius, segments, thetaStart, thetaLength)
+const circle = new THREE.CircleGeometry(
+  radius, segments, 
+  thetaStart, thetaLength
+)
 ```
 
 Example: [Circle Geometry]()
 
 ## Ring Geometry
 
-The `THREE.RingGeometry` creates 2D disc with a hole in the center. This is very similar to circle geometry.
+The `THREE.RingGeometry` creates a 2D disc with a hole in the center. This is very similar to circle geometry.
 
 - `innerRadius` - The inner radius of a circle defines the size of the hole in the center. `0` means, no hole. The default value is `0.5`.
 - `outerRadius` - The outer radius of a circle defines its size. The default value is `1`.
-- `thetaSegments` - the number of diagonal segments that are used to create the circle. The default value is `8`. The more the segments the a smoother circle is.
+- `thetaSegments` - the number of diagonal segments that are used to create the circle. The default value is `8`. The more segments the smoother circle is.
 - `phiSegments` -  the number of segments required to be used along the length of the ring. The default value is `8`.
 - `thetaStart` - The position from which to start drawing the circle. This value can range from `0` to `2 * PI`, and the default value is `0`.
 - `thetaLength` - This property defines to what extent the circle is completed. The default value is `2 * PI`.
@@ -49,7 +55,8 @@ The `THREE.RingGeometry` creates 2D disc with a hole in the center. This is very
 const ring = new THREE.RingGeometry(
     innerRadius, outerRadius,
     thetaSegments, phiSegments,
-    thetaStart, thetaLength)
+    thetaStart, thetaLength
+  )
 ```
 
 Example: [Ring Geometry]()
@@ -62,7 +69,7 @@ The `THREE.BoxGeometry` creates a simple 3D box with specified dimensions. This 
 const box = new THREE.CubeGeometry(
     width, height, depth, 
     widthSegments, heightSegments, depthSegments
-)
+  )
 ```
 
 Example: [Rubix cube]()
@@ -86,7 +93,7 @@ const sphere = new THREE.SphereGeometry(
     widthSegments, heightSegments, 
     phiStart, phiLength, 
     thetaStart, thetaLength
-)
+  )
 ```
 
 ## Cylinder Geometry
@@ -97,9 +104,9 @@ To create a cylinder in Three.js, you can use the `Three.CylinderGeometry`.
 - `radiusBottom` - Radius of the cylinder at the bottom. Default is `1`.
 - `height` - Height of the cylinder. Default is `1`.
 - `radialSegments` - the number of segments around the circumference of the cylinder. Default is `8`.
-- `heightSegments` - Number of rows of faces along the height of the cylinder. Default is `1`.
+- `heightSegments` - Number of rows of faces along with the height of the cylinder. Default is `1`.
 - `openEnded` - It's a Boolean indicating whether the ends of the cylinder are open or not. Default is `false`, meaning closed.
-- `thetaStart` - Start angle for first segment, defaults to `0`.
+- `thetaStart` - Start angle for the first segment, defaults to `0`.
 - `thetaLength` - The central angle, often called `theta`, of the circular sector. The default is `2* Math.PI`, which makes for a complete cylinder.
 
 ```js
@@ -107,7 +114,8 @@ const cylinder = new THREE.CylinderGeometry(
     radiusTop, radiusBottom, height,
     radialSegments, heightSegments,
     openEnded,
-    thetaStart, thetaLength)
+    thetaStart, thetaLength
+  )
 ```
 
 ## Cone Geometry
@@ -119,7 +127,8 @@ const cone = new THREE.ConeGeometry(
     radius, height,
     radialSegments, heightSegments,
     openEnded,
-    thetaStart, thetaLength)
+    thetaStart, thetaLength
+  )
 ```
 
 ## Torus Geometry
@@ -130,26 +139,28 @@ Torus is a tube-like shape that looks like a donut. You can use `THREE.TorusGeom
 const torus = new THREE.TorusGeometry(
     radius, tubeRadius,
     radialSegments, tubularSegments,
-    arc)
+    arc
+  )
 ```
 
 ## TorusKnot Geometry
 
-A torus-knot is a special kind of knot that looks like a tube that winds around itself a couple of times. You can create a torus-knot using `THREE.TorusKnotGeometry`. It's pretty similar to `TorusGeometry` with additional properties, the `p` and `q`.
+A torus knot is a special kind of knot that looks like a tube that winds around itself a couple of times. You can create a torus-knot using `THREE.TorusKnotGeometry`. It's pretty similar to `TorusGeometry` with additional properties, the `p` and `q`.
 
 - `p` - It defines how many times the geometry winds around its axis of rotational symmetry. Default is `2`.
-- `q` - It defines how many times the geometry winds around the interior of torus. This defaults to `3`.
+- `q` - It defines how many times the geometry winds around the interior of the torus. This defaults to `3`.
 
 ```js
 const torusKnot = new THREE.TorusKnotGeometry(
     radius, tubeRadius, 
     tubularSegments, radialSegments, 
-    p, q)
+    p, q
+  )
 ```
 
 ## Polyhedron Geometry
 
-A polyhedron is a geometry that has only flat faces and straight edges. You can draw different types of polyhedrons by specifing `vertices` and `indices`.
+A polyhedron is a geometry that has only flat faces and straight edges. You can draw different types of polyhedrons by specifying `vertices` and `indices`.
 
 - `vertices` - Array of points that make up the polyhedron.
 - `indices` - Array of indices that make up the faces from the vertices.

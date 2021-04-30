@@ -8,28 +8,25 @@ Like any other programming language, let’s start learning Three.js by creating
 /index.html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8" />
-  <title>Three.js - Hello cube</title>
-  <style>
-    /* Our CSS goes here */
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js">
-</script>
-</head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>Three.js - Hello cube</title>
+    <style>
+      /* Our CSS goes here */
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
+  </head>
 
-<body>
-  <div id="threejs-container">
-    <!-- Our output will be rendered here -->
-  </div>
+  <body>
+    <div id="threejs-container">
+      <!-- Our output will be rendered here -->
+    </div>
 
-
-<script>
-  // our JavaScript code goes here
-</script>
-</body>
-
+    <script>
+      // our JavaScript code goes here
+    </script>
+  </body>
 </html>
 ```
 
@@ -61,7 +58,7 @@ body {
 </style>
 ```
 
-This is just the basic styling of the HTML page. The threejs-container is made to take up the whole screen.
+This is just the basic styling of the HTML page. The `threejs-container` is made to take up the whole screen.
 
 ## The JavaScript
 
@@ -75,10 +72,10 @@ const scene = new THREE.Scene()
 scene.background = new THREE.Color('#00b140')
 
 // Camera
-const fov = 45 // AKA Field of View 
+const fov = 45 // AKA Field of View
 const aspect = window.innerWidth / window.innerHeight
-const near = 0.1 // the near clipping plane 
-const far = 100; // the far clipping plane 
+const near = 0.1 // the near clipping plane
+const far = 100 // the far clipping plane
 
 const camera = new PerspectiveCamera(fov, aspect, near, far)
 camera.position.set(0, 0, 10)
@@ -100,7 +97,6 @@ container.append(renderer.domElement)
 renderer.render(scene, camera)
 ```
 
-
 Let’s discuss the code one step at a time and then you can get more information about each element in the upcoming chapters.
 The first thing we need to do is to create a scene, a camera, and a renderer. These are the basic components that make up every Three.js app.
 
@@ -108,10 +104,10 @@ The first thing we need to do is to create a scene, a camera, and a renderer. Th
 
 ```js
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('#00b140')
+scene.background = new THREE.Color('#2626262')
 ```
 
-The `scene` serves as the container for everything we can see on the screen. Without a `THREE.Scene` object, Three.js cannot render anything. The background color to green, so that we can see the cube.
+The `scene` serves as the container for everything we can see on the screen. Without a `THREE.Scene` object, Three.js cannot render anything. The background color is dark gray, so that we can see the cube.
 
 ### The Camera
 
@@ -129,7 +125,7 @@ const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 ```
 
-The renderer object is responsible for calculating what the scene object will look like in the browser-based on what the camera is looking at. There are different types of renderers but we mainly use `WebGLRenderer` since most of the browsers support WebGL. 
+The renderer object is responsible for calculating what the scene object will look like in the browser based on what the camera is looking at. There are different types of renderers, but we mainly use `WebGLRenderer` since most of the browsers support WebGL.
 
 In addition to creating the renderer instance, we also need to set the size at which we want it to render our app. It's a good idea to use the width and height of the area we want to fill with our app - in this case, the width and height of the browser window.
 
@@ -137,7 +133,10 @@ In addition to creating the renderer instance, we also need to set the size at w
 
 ```js
 const geometry = new THREE.BoxGeometry(2, 2, 2)
-const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true })
+const material = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  wireframe: true,
+})
 const cube = new THREE.Mesh(geometry, material)
 scene.add(cube)
 ```
@@ -154,7 +153,7 @@ container.append(renderer.domElement)
 renderer.render(scene, camera)
 ```
 
-Last but not least, we add the renderer element to our HTML document. This is a `<canvas>` element the renderer uses to display the scene to us. In this case, the `<canvas>` element will be appended to the reference container in the HTML.
+Last but not least, we add the renderer element to our HTML document. This is an `<canvas>` element the renderer uses to display the scene to us. In this case, the `<canvas>` element will be appended to the reference container in the HTML.
 
 ### The Result
 

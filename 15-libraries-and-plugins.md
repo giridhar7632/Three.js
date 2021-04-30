@@ -56,4 +56,4 @@ In addition to the [official three.js loaders](https://github.com/mrdoob/three.j
 - [react-three-fiber](https://github.com/pmndrs/react-three-fiber)
 - [ECSY](https://github.com/ecsyjs/ecsy-three)
 
-This is the list maintained by the Three.js official community. There are also many other libraries and plugins to add wonderful effect more easier.
+This is the list maintained by the Three.js official community. There are also many other libraries and plugins to add wonderful effects easier.

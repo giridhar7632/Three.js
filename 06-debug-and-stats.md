@@ -1,24 +1,24 @@
 # THREE.JS - DEBUG AND STATS
 
-## Using Dat.GUI 
+## Using Dat.GUI
 
-It will be hard to keep experimenting the values of variables, like `position` of the cube, until you get something that you like. It's a kind of slow and overwhelming process. Luckily, there is already a good solution available that integrates great with Three.js, `dat.gui`. It allows you to create a basic user interface component that can change variables in your code.
+It will be hard to keep experimenting with the values of variables, like the `position` of the cube, until you get something that you like. It's a kind of slow and overwhelming process. Luckily, there is already a good solution available that integrates great with Three.js, `dat.gui`. It allows you to create a basic user interface component that can change variables in your code.
 
 ### Installation
 
 To use `dat.gui` in your project, download it [here](https://github.com/dataarts/dat.gui) and add the `<script>` tag to the HTML file.
 
 ```js
-<script type='text/javascript' src="path/to/dat.gui.min.js"></script>
+<script type='text/javascript' src='path/to/dat.gui.min.js'></script>
 ```
 
-Or you can use CDN, add the following `<script>` tag inside your HTML. 
+Or you can use CDN, add the following `<script>` tag inside your HTML.
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
 ```
 
-If you are using Three.js in a node app, install the [npm package](https://www.npmjs.com/package/dat.gui) - `dat.gui` and import it into your JavaScript file..
+If you are using Three.js in a node app, install the [npm package](https://www.npmjs.com/package/dat.gui) - `dat.gui` and import it into your JavaScript file.
 
 ```bash
 npm install dat.gui
@@ -31,7 +31,7 @@ import * as dat from 'dat.gui'
 ```
 
 ### Usage
- 
+
 First, you should initialize the object itself. It will create a widget and display it on the screen top right corner.
 
 ```js
@@ -60,7 +60,7 @@ gui.add(cube.position, 'y').min(1).max(10).step(1)
 gui.add(cube.position, 'y', 1, 10, 1)
 ```
 
-If there are many varibles with same name, you may find difficult to differentiaite among them. In that case, you can add folders for every object. All the variables related to an object will be in one folder.
+If there are many varibles with the same name, you may find it difficult to differentiate among them. In that case, you can add folders for every object. All the variables related to an object will be in one folder.
 
 ```js
 // creating a folder
@@ -82,9 +82,9 @@ You can also add some callback functions.
 `onChange` is triggered once the value is changed.
 
 ```js
-gui.add(cube.position, 'y').onChange(function(){
-    // refresh based on the new value of y
-    console.log(cube.position.y)
+gui.add(cube.position, 'y').onChange(function () {
+  // refresh based on the new value of y
+  console.log(cube.position.y)
 })
 ```
 
@@ -93,31 +93,30 @@ Let's see another example of changing color using `dat.gui` and `callbacks`.
 ```js
 // parameter
 const cubeColor = {
-  color: 0xff0000
+  color: 0xff0000,
 }
 
-gui.addColor(cubeColor, 'color')
-  .onChange(() => {
-    // callback
-    cube.color.set(cubeColor.color)
-  })
+gui.addColor(cubeColor, 'color').onChange(() => {
+  // callback
+  cube.color.set(cubeColor.color)
+})
 ```
 
-The above callback `.onChange` notifies Three.js to change the color of cube when the `color` from `cubeColor` is changed.
+The above callback `.onChange` notifies Three.js to change the color of the cube when the `color` from `cubeColor` is changed.
 
-We are going to use this `dat.gui` a lot from now. Make sure you get to used to it by experimenting with "Hello Cube!" app.
+We are going to use this `dat.gui` a lot from now. Make sure you get to used to it by experimenting with the "Hello Cube!" app.
 
 ## Stats
 
-Statatics play an important role in large scale applications. If you are creating a larger Three.js project with many objects and animations, it is good to monitor the performance of the code like fps(frames per second), memory allocated, etc. The creator of Three.js also created a small JavaScript library, `Stats.js`, to monitor the rendering.
+Statistics play an important role in large-scale applications. If you are creating a larger Three.js project with many objects and animations, it is good to monitor the performance of the code like fps(frames per second), memory allocated, etc. The creator of Three.js also created a small JavaScript library, `Stats.js`, to monitor the rendering.
 
 ### Installation
 
 Just like any other library, you can simply add it to your project in any of the three ways like discussed previously.
 
-You can download it from [GitHub](https://github.com/mrdoob/stats.js/) and import to your HTML page.
+You can download it from [GitHub](https://github.com/mrdoob/stats.js/) and import it to your HTML page.
 
-Or you can add CDN link to the HTML page.
+Or you can add the CDN link to the HTML page.
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js"></script>
@@ -146,45 +145,45 @@ You can monitor the following properties using `Stats.js`.
 
 The `fps` and `ms` are monitored most commonly.
 
-### How it works?
+### How does it works?
 
-If you're monitoring the framerate, it counts how often the update was called within the last second, and shows that value. If you're monitoring the render time, it just shows the time between calls and the update function.
+If you're monitoring the frame rate, it counts how often the update was called within the last second, and shows that value. If you're monitoring the render time, it just shows the time between calls and the update function.
 
 ### Usage
 
 You can add this functionality to your code in a few simple steps.
 
-- Create the `stats` object and add it to the HTML page using the `dom`.
+Create the `stats` object and add it to the HTML page using the `dom`.
 
 ```js
 const stats = new Stats()
-stats.showPanel( 1 ) // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild( stats.dom )
+stats.showPanel(1) // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild(stats.dom)
 ```
 
 **Note:** You can show the panel you want using `showPanel()`. By default, `fps` panel will be displayed and you can toggle between panels by clicking on the panel.
 
-- Select the code you want to monitor.
+Select the code you want to monitor.
 
 ```js
-	stats.begin()
+stats.begin()
 
-	// monitored code goes here
-  // in our case the render function
-  renderer.render(scene, camera)
+// monitored code goes here
+// in our case the render function
+renderer.render(scene, camera)
 
-	stats.end()
+stats.end()
 ```
 
-- If you are using animations, you should update the stats whenever the frame is rendered.
+If you are using animations, you should update the stats whenever the frame is rendered.
 
 ```js
 function animate() {
-  requestAnimationFrame(render);
+  requestAnimationFrame(render)
 
   // our animations
-  renderer.render(scene, camera);
-  stats.update();
+  renderer.render(scene, camera)
+  stats.update()
 }
 ```
 

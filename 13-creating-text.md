@@ -1,6 +1,6 @@
 # THREE.JS - CREATING TEXT
 
-Often you neeed to add text to your scene. In this chapter, let's see some of the ways of adding text to our scene.
+Often you need to add text to your scene. In this chapter, let's see some ways of adding text to our scene.
 
 ## Draw text to canvas and use as a Texture
 
@@ -15,11 +15,11 @@ The code above creates a `canvas` element and we set the context to `2d`. The `c
 
 ```js
 context.fillStyle = 'green'
-context.font = '60px san-serif'
+context.font = '60px sans-serif'
 context.fillText('Hello World!', 0, 60)
 ```
 
-The `fillText()` is a method of a 2D drawing context. The `fillText()` method allows you to draw a text string at a coordinate with the fill (color) that is derived from the `fillStyle` you provided. You can set the font of the test using the `font` property.
+The `fillText()` is a method of a 2D drawing context. The `fillText()` method allows you to draw a text string at a coordinate with the fill (color) that is derived from the `fillStyle` you provided. You can set the font of the text using the `font` property.
 
 The above code set the font to `60-pixel-tall san-serif` and the fill style to `green`. The text `'Hello, World!'` is drawn starting at the coordinates `(0, 60)`.
 
@@ -29,7 +29,7 @@ const texture = new THREE.Texture(canvas)
 texture.needsUpdate = true
 ```
 
-To create a texture from a canvas element, all we need to do is create a new instance of `THREE.Texture` and pass in the `canvas` element we created. The code above creates a texture using the canvas (in this case, our text). The `needsUpdate` parameter of the texture is set to `true`. This informs Three.js that our canvas texture has changed and needs to be updated the next time the scene is rendered.
+To create a texture from a canvas element, we need to create a new instance of `THREE.Texture` and pass in the `canvas` element we created. The code above creates a texture using the canvas (in this case, our text). The `needsUpdate` parameter of the texture is set to `true`. This informs Three.js that our canvas texture has changed and needs to be updated the next time the scene is rendered.
 
 Now create a plane geometry and add this as a texture to the material.
 
@@ -97,7 +97,7 @@ mesh.name = 'text'
 scene.add(mesh)
 ```
 
-> **Note:** There is one thing you need to take into account when working with `THREE.TextGeometry` and materials. It can take two materials as an array: one for front of rendered text and another for side of the text. If you just pass in one material, it is applied to both the front and the side.
+> **Note:** There is one thing you need to take into account when working with `THREE.TextGeometry` and materials. It can take two materials as an array: one for the front of rendered text and another for the side of the text. If you just pass in one material, it is applied to both the front and the side.
 
 Now you can see the text rendered to the scene.
 

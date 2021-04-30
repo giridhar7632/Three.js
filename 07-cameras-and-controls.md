@@ -10,7 +10,7 @@ There are a few different cameras in Three.js. The most common camera and the on
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
 ```
 
-The first attribute is the **Field of View** (FOV). FOV is the part of the scene that is seen on the display at any given moment. The value is in degrees. Humans have an almost 180-degree FOV. But since a normal computer screen doesn’t completely fill our vision, a smaller value is often chosen. Generally, for games, a FOV between 60 and 90 degrees is chosen.
+The first attribute is the **Field of View** (FOV). FOV is the part of the scene that is seen on the display at any given moment. The value is in degrees. Humans have an almost 180-degree FOV. But since a normal computer screen doesn’t fill our vision, a smaller value is often chosen. Generally, for games, a FOV between 60 and 90 degrees is chosen.
 
 > **Good default:** `50`
 
@@ -61,23 +61,23 @@ function animate() {
 }
 ```
 
-In the `animation` function, we use the `camera.lookAt` function to point the camera to the position function of the object. As we do this in every frame that we render, it will look like camera is exactly following the position of object.
+In the `animation` function, we use the `camera.lookAt` function to point the camera to the position function of the object. As we do this in every frame that we render, it will look like camera is exactly following the position of the object.
 
 ## Controls
 
-You can move camera around the scene using camera controls. Three.js has a number of camera controls you can use to control the camera throughout a scene. You have to get the controls seperately. These are not it included in Three.js library. [Controls](https://github.com/mrdoob/three.js/blob/master/examples/js/controls)
+You can move the camera around the scene using camera controls. Three.js has a number of camera controls you can use to control the camera throughout a scene. You have to get the controls separately. These are not included in Three.js library. [Controls](https://github.com/mrdoob/three.js/blob/master/examples/js/controls)
 
 ### Orbit controls
 
-Orbit controls allows the camera to orbit around a center of the scene. You can also provide a target to move around. You can add `Orbitcontrols` in a few simple steps.
+Orbit controls allow the camera to orbit around the center of the scene. You can also provide a target to move around. You can add `Orbitcontrols` in a few simple steps.
 
-1. Create the new instance of the orbit controls and pass the camera.
+Create a new instance of the orbit controls and pass the camera.
 
 ```js
 const controls = new THREE.OrbitControls(camera, render.domElement)
 ```
 
-1. Update the controls for every frame. You can simply do it in your animation loop.
+Update the controls for every frame. You can simply do it in your animation loop.
 
 ```js
 function animate() {
@@ -94,7 +94,7 @@ There are many other settings to make your experience better. The code is well-d
 
 ### Trackball controls
 
-TrackballControls is similar to OrbitControls. However, it does not maintain a constant camera up vector. That means that the camera can orbits past it's polar extremes. It won't flip to stay the right side up. You can add it just like the pervious one.
+TrackballControls is similar to OrbitControls. However, it does not maintain a constant camera up vector. That means that the camera can orbit past its polar extremes. It won't flip to stay the right side up. You can add it just like the previous one.
 
 ```js
 const controls = new THREE.TrackballControls(camera, render.domElement)
@@ -110,20 +110,20 @@ const controls = new THREE.FlyControls(camera, render.domElement)
 
 ### PointerLock controls
 
-The `PointerLockControls` implements the inbuilt browsers [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API). It allows you to control the camera just like in a first-person in 3D games.
+The `PointerLockControls` implements the in-built browsers [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API). It allows you to control the camera just like in a first-person in 3D games.
 
 ```js
-const controls = new PointerLockControls( camera, document.body );
+const controls = new PointerLockControls(camera, document.body)
 
 // add event listener to show/hide a UI (e.g. the game's menu)
-controls.addEventListener( 'lock', function () {
-	menu.style.display = 'none';
-} )
-controls.addEventListener( 'unlock', function () {
-	menu.style.display = 'block';
-} )
+controls.addEventListener('lock', function () {
+  menu.style.display = 'none'
+})
+controls.addEventListener('unlock', function () {
+  menu.style.display = 'block'
+})
 ```
 
 This is a simple 3D game created using PointerLock controls.
 
-We have seen the most useful controls in this chapter. Some developers are creatingmore useful controls for Three.js. You can see some other contols [here](https://github.com/mrdoob/three.js/blob/master/examples/js/controls) well documented and easy to use.
+We have seen the most useful controls in this chapter. Some developers are creating more useful controls for Three.js. You can see some other controls [here](https://github.com/mrdoob/three.js/blob/master/examples/js/controls) well documented and easy to use.

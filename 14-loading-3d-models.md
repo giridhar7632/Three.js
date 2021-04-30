@@ -1,8 +1,8 @@
 # THREE.JS - LOADING 3D MODELS
 
-3D models are available in many formats. You can import most of the models into Three.js and work with them easily. Some formats are difficult to work with, inefficient for realtime experiences, or simply not fully supported by Three.js at this time. Let's discuss about some of the common formats and how to load them into Three.js file.
+3D models are available in many formats. You can import most of the models into Three.js and work with them easily. Some formats are difficult to work with, inefficient for real-time experiences, or simply not fully supported by Three.js at this time. Let's discuss about some of the common formats and how to load them into the Three.js file.
 
-> **Note:** Only few format loaders are built-in in Three.js. For loading other format models, their JavaScript files are need to be included. You can find all different loaders in the Three.js repo in the [three/examples/jsm/loaders](https://github.com/mrdoob/three/examples/jsm/loaders) directory.
+> **Note:** Only a few format loaders are built-in in Three.js. For loading other format models, their JavaScript files need to be included. You can find all the different loaders in the Three.js repo in the [three/examples/jsm/loaders](https://github.com/mrdoob/three/examples/jsm/loaders) directory.
 
 For loading any model, we use these simple three steps:
 
@@ -33,7 +33,7 @@ In this code, we use OBJLoader to load the model from a URL. Once the model is l
 
 ## MTL Model Loader
 
-`OBJ` and `MTL` are companion formats and often used together. The `MTL` file defines the materials that are used for the geometry in `OBJ` files. The `MTL` is also in text-based format.
+`OBJ` and `MTL` are companion formats and often used together. The `MTL` file defines the materials that are used for the geometry in `OBJ` files. The `MTL` is also in a text-based format.
 
 ```html
 <script type="text/javascript" src="../scripts/MTLLoader.js"></script>
@@ -57,7 +57,7 @@ mtlLoader.load('/path/to/your/.mtl file', (materials) => {
 })
 ```
 
-It loades the materials first. Then we set the materials of the `OBJ` file to loaded as the loaded material and then load the `OBJ` file. This creates the mesh we needed to render an object to the scene. As the customise the mesh or material just like those in Three.js projects.
+It loads the materials first. Then we set the materials of the `OBJ` file to load as the loaded material and then load the `OBJ` file. This creates the mesh we needed to render an object to the scene. As the customize the mesh or material just like those in Three.js projects.
 
 ## GLTF Model Loader
 
@@ -83,7 +83,7 @@ The `scene` of the imported `glTF` model is added to our Three.js project. The l
 
 The `DRACOLoader` is used to load geometry (`.drc` format files) compressed with the Draco library.
 
-> [Draco](https://google.github.io/draco/) is an open source library for compressing and decompressing 3D meshes and point clouds.
+> [Draco](https://google.github.io/draco/) is an open-source library for compressing and decompressing 3D meshes and point clouds.
 
 `glTF` files can also be compressed using the DRACO library, and they can also be loaded using the `glTFLoader`. We can configure the `glTFLoader` to use the `DRACOLoader` to decompress the file in such cases.
 
@@ -92,7 +92,7 @@ The `DRACOLoader` is used to load geometry (`.drc` format files) compressed with
 <script src="../scripts/DRACOLoader.js"></script>
 ```
 
-Like any other model, you can easily load the `.drc` files using `DRACOLoader`. And then you can add `Material` to the geometry loaded and renser the `Mesh` to the scene.
+Like any other model, you can easily load the `.drc` files using `DRACOLoader`. And then you can add `Material` to the geometry loaded and render the `Mesh` to the scene.
 
 ```js
 const loader = new THREE.DRACOLoader()
@@ -125,7 +125,7 @@ loader.load('models/monkey_compressed.glb', (gltf) => {
 
 The STL model format is widely used for rapid prototyping, 3D printing and computer-aided manufacturing.
 
-STL files describe only the surface geometry of a 3D object without any representation of color, texture or other common 3d modelling attributes. You can add them in the callback function.
+STL files describe only the surface geometry of a 3D object without any representation of color, texture or other common 3d modeling attributes. You can add them in the callback function.
 
 ```html
 <script src="../scripts/STLLoader.js"></script>
@@ -147,7 +147,7 @@ There are many other formats you can load into your Three.js project. The above 
 
 ## Troubleshooting
 
-If you are not able to load your model properly or it is distorted, miscolored, or missing entirely. These are some troubleshooting steps mentioned in official Three.js site:
+If you are not able to load your model properly or it is distorted, discolored, or missing entirely. These are some troubleshooting steps mentioned in official Three.js site:
 
 1. Check the JavaScript console for errors, and make sure you've used an `onError` callback when calling `.load()` to log the result.
 2. View the model in another application. For `glTF`, drag-and-drop viewers are available for `Three.js` and `Babylon.js`. If the model appears correctly in one or more applications, file a bug against `Three.js`. If the model cannot be shown in any application, You should file a bug with the application used to create the model.
