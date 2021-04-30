@@ -4,7 +4,7 @@
 
 ### PerspectiveCamera
 
-There are a few different cameras in Three.js. The most common camera and the one we've been using is the `PerspectiveCamera`.
+There are a few different cameras in Three.js. The most common camera and the one we've been using is the `PerspectiveCamera`. It is like the human eye view, objects gets smaller as they move farther from the camera.
 
 ```js
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
@@ -32,7 +32,9 @@ The `far` property defines how far the camera can see from the position of the c
 
 ### OrthographicCamera
 
-The 2nd most common camera is the `OrthographicCamera`. It specifies a box with the settings left, right top, bottom, near, and far. It represents three-dimensional objects in two dimensions.
+The 2nd most common camera is the `OrthographicCamera`. While using orthographic camera, the size of objects does not change even when they gets far away from the camera. This camera provies a nice isometric view, that means all lines along z-axis are drwn parallel.
+
+It specifies a box with the settings left, right top, bottom, near, and far. It represents three-dimensional objects in two dimensions.
 
 ```js
 const camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far)

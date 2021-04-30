@@ -8,11 +8,12 @@ In this chapter, we'll discuss basic built-in geometries. We’ll first look at 
 
 The `THREE.PlaneGeometry` is used to create a simple 2D rectangle. It takes four arguments, the `width`, `height` are mandatory and the `widthSegments`, `heightSegments` are optional.
 
-- `width` -  the width of the rectangle.
-- `height` -  the height of the rectangle.
+- `width` - the width of the rectangle.
+- `height` - the height of the rectangle.
 - `widthSegments` - the number of segments the width should be divided into. This defaults to `1`.
 - `heightSegments` - the number of segments the height should be divided into. This defaults to `1`.
 
+<!-- prettier-ignore -->
 ```js
 const plane = new THREE.PlaneGeometry(
   width, height, 
@@ -31,6 +32,7 @@ The `THREE.CircleGeometry` is used to create a simple 2D circle. It takes four a
 - `thetaStart` - The position from which to start drawing the circle. This value can range from `0` to `2 * PI`, and the default value is `0`.
 - `thetaLength` - This property defines to what extent the circle is completed. The default value is `2 * PI`.
 
+<!-- prettier-ignore -->
 ```js
 const circle = new THREE.CircleGeometry(
   radius, segments, 
@@ -47,10 +49,11 @@ The `THREE.RingGeometry` creates a 2D disc with a hole in the center. This is ve
 - `innerRadius` - The inner radius of a circle defines the size of the hole in the center. `0` means, no hole. The default value is `0.5`.
 - `outerRadius` - The outer radius of a circle defines its size. The default value is `1`.
 - `thetaSegments` - the number of diagonal segments that are used to create the circle. The default value is `8`. The more segments the smoother circle is.
-- `phiSegments` -  the number of segments required to be used along the length of the ring. The default value is `8`.
+- `phiSegments` - the number of segments required to be used along the length of the ring. The default value is `8`.
 - `thetaStart` - The position from which to start drawing the circle. This value can range from `0` to `2 * PI`, and the default value is `0`.
 - `thetaLength` - This property defines to what extent the circle is completed. The default value is `2 * PI`.
 
+<!-- prettier-ignore -->
 ```js
 const ring = new THREE.RingGeometry(
     innerRadius, outerRadius,
@@ -76,11 +79,11 @@ Example: [Cube geometry](/assests/09-geometries/04-cube.html)
 
 ## Sphere Geometry
 
-The `THREE.SphereGeometry` is used to create 3D sphere geometries.  You can create different types of sphere-related geometries by passing the arguments.
+The `THREE.SphereGeometry` is used to create 3D sphere geometries. You can create different types of sphere-related geometries by passing the arguments.
 
 - `radius` - The radius of a circle defines its size. The default value is `1`.
 - `widthSegments` - number of segments to be used vertically. This defaults to `8`.
-- `heightSegments` -  the number of segments to be used horizontally. This defaults to `6`.
+- `heightSegments` - the number of segments to be used horizontally. This defaults to `6`.
 - `phiStart` - The position from which to start drawing the circle. This value can range from `0` to `2 * PI`, and the default value is `0`.
 - `phiLength` - This property defines to what extent the circle is completed. The default value is `2 * PI`.
 - `thetaStart` - The position from which to start drawing the circle. This value can range from `0` to `2 * PI`, and the default value is `0`.
@@ -200,11 +203,11 @@ Example: [Polyhedron Geometry](/assests/09-geometries/10-polyhedron.html)
 
 Three.js also has geometries for some common polyderons.
 
-|Polyhedron| no. of faces|code|
-|-----|-----|-----|
-|Tetrahedron| 4 | `THREE.TetrahedronGeometry`|
-|Octahedron| 8 | `THREE.OctahedronGeometry`|
-|Dodecahedron| 12 | `THREE.DodecahedronGeometry`|
-|Icosahedron| 20 | `THREE.IcosahedronGeometry`|
+| Polyhedron   | no. of faces | code                         | example                                                              |
+| ------------ | ------------ | ---------------------------- | -------------------------------------------------------------------- |
+| Tetrahedron  | 4            | `THREE.TetrahedronGeometry`  | [Tetrahedron Grometry](/assests/09-geometries/11-tetrahedron.html)   |
+| Octahedron   | 8            | `THREE.OctahedronGeometry`   | [Octahedron Geometry](/assests/09-geometries/13-octahedron.html)     |
+| Dodecahedron | 12           | `THREE.DodecahedronGeometry` | [Dodecahedron Geometry](/assests/09-geometries/14-dodecahedron.html) |
+| Icosahedron  | 20           | `THREE.IcosahedronGeometry`  | [Icosahedron Geometry](/assests/09-geometries/12-icosahedron.html)   |
 
 Learn more about geometries [here](https://threejs.org/docs/#api/en/geometries/BoxGeometry).
