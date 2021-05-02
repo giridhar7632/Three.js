@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js - Polyhedrons</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+          Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      html,
+      body {
+        height: 100vh;
+        width: 100vw;
+      }
+      #threejs-container {
+        position: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script src="../scripts/three.min.js"></script>
+    <script src="../scripts/dat.gui.min.js"></script>
+  </head>
+  <body>
+    <div id="threejs-container"></div>
+    <script type="module">
+      const gui = new dat.GUI()
+
+      // width, height
+      let width = window.innerWidth
+      let height = window.innerHeight
+
+      // scene
+      const scene = new THREE.Scene()
+      scene.background = new THREE.Color(0x262626)
+
+      // camera
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
+      camera.position.set(0, 0, 10)
+      const camFolder = gui.addFolder('Camera')
+      camFolder.add(camera.position, 'z').min(10).max(60).step(10)
+      camFolder.open()
+
+      // tetrahedron
+      const geometry = new THREE.TetrahedronGeometry()
+      const material = new THREE.MeshNormalMaterial()
+
+      const materialFolder = gui.addFolder('Material')
+      materialFolder.add(material, 'wireframe')
+      materialFolder.open()
+
+      const tetrahedron = new THREE.Mesh(geometry, material)
+      tetrahedron.position.set(-5, 0, 0)
+      scene.add(tetrahedron)
+
+      const tetrahedronProps = {
+        radius: 1,
+        detail: 1
+      }
+      const tetraProps = gui.addFolder('Tetrahedron')
+      tetraProps
+        .add(tetrahedronProps, 'radius', 1, 50)
+        .step(1)
+        .onChange(redrawTetrahedron)
+        .onFinishChange(() => console.dir(tetrahedron.geometry))
+      tetraProps.add(tetrahedronProps, 'detail', 1, 50, 1).onChange(redrawTetrahedron)
+      tetraProps.open()
+
+      function redrawTetrahedron() {
+        let newGeometry = new THREE.TetrahedronGeometry(
+          tetrahedronProps.radius,
+          tetrahedronProps.detail
+        )
+        tetrahedron.geometry.dispose()
+        tetrahedron.geometry = newGeometry
+      }
+
+      // octahedron
+      const geometry1 = new THREE.OctahedronGeometry()
+      const octahedron = new THREE.Mesh(geometry1, material)
+      octahedron.position.set(-2.5, 0, 0)
+      scene.add(octahedron)
+
+      const octahedronProps = {
+        radius: 1,
+        detail: 1
+      }
+      const octaProps = gui.addFolder('Octahedron')
+      octaProps
+        .add(octahedronProps, 'radius', 1, 50)
+        .step(1)
+        .onChange(redrawOctahedron)
+        .onFinishChange(() => console.dir(octahedron.geometry))
+      octaProps.add(octahedronProps, 'detail', 1, 50, 1).onChange(redrawOctahedron)
+      octaProps.open()
+
+      function redrawOctahedron() {
+        let newGeometry = new THREE.OctahedronGeometry(
+          octahedronProps.radius,
+          octahedronProps.detail
+        )
+        octahedron.geometry.dispose()
+        octahedron.geometry = newGeometry
+      }
+
+      // dodecahedron
+      const geometry2 = new THREE.DodecahedronGeometry()
+
+      const dodecahedron = new THREE.Mesh(geometry2, material)
+      dodecahedron.position.set(0, 0, 0)
+      scene.add(dodecahedron)
+
+      const dodecahedronProps = {
+        radius: 1,
+        detail: 1
+      }
+      const dodecaProps = gui.addFolder('Dodecahedron')
+      dodecaProps
+        .add(dodecahedronProps, 'radius', 1, 50)
+        .step(1)
+        .onChange(redrawDodecahedron)
+        .onFinishChange(() => console.dir(dodecahedron.geometry))
+      dodecaProps.add(dodecahedronProps, 'detail', 1, 50, 1).onChange(redrawDodecahedron)
+      dodecaProps.open()
+
+      function redrawDodecahedron() {
+        let newGeometry = new THREE.DodecahedronGeometry(
+          dodecahedronProps.radius,
+          dodecahedronProps.detail
+        )
+        dodecahedron.geometry.dispose()
+        dodecahedron.geometry = newGeometry
+      }
+
+      // icosahedron
+      const geometry3 = new THREE.IcosahedronGeometry()
+
+      const icosahedron = new THREE.Mesh(geometry3, material)
+      icosahedron.position.set(2.5, 0, 0)
+      scene.add(icosahedron)
+
+      const icosahedronProps = {
+        radius: 1,
+        detail: 1
+      }
+      const icosaProps = gui.addFolder('Icosahedron')
+      icosaProps
+        .add(icosahedronProps, 'radius', 1, 50)
+        .step(1)
+        .onChange(redrawIcosahedron)
+        .onFinishChange(() => console.dir(icosahedron.geometry))
+      icosaProps.add(icosahedronProps, 'detail', 1, 50, 1).onChange(redrawIcosahedron)
+      icosaProps.open()
+
+      function redrawIcosahedron() {
+        let newGeometry = new THREE.IcosahedronGeometry(
+          icosahedronProps.radius,
+          icosahedronProps.detail
+        )
+        icosahedron.geometry.dispose()
+        icosahedron.geometry = newGeometry
+      }
+
+      // responsiveness
+      window.addEventListener('resize', () => {
+        width = window.innerWidth
+        height = window.innerHeight
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer.render(scene, camera)
+      })
+
+      // renderer
+      const renderer = new THREE.WebGL1Renderer()
+      renderer.setSize(width, height)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+      // animation
+      function animate() {
+        requestAnimationFrame(animate)
+
+        const polyhedrons = [tetrahedron, octahedron, dodecahedron, icosahedron]
+        polyhedrons.forEach((hedron) => {
+          hedron.rotation.x += 0.005
+          hedron.rotation.y += 0.01
+        })
+
+        renderer.render(scene, camera)
+      }
+
+      // rendetetrahedron the scene
+      const container = document.querySelector('#threejs-container')
+      container.append(renderer.domElement)
+      renderer.render(scene, camera)
+      animate()
+    </script>
+  </body>
+</html>
