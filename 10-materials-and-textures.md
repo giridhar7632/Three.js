@@ -32,7 +32,7 @@ const material = new THREE.MeshDepthMaterial()
 const torusKnot = new THREE.Mesh(geometry, material)
 ```
 
-You can understand better about it's color in this s=example of torus-knot.
+You can understand better about it's color in this example of torus-knot.
 
 ### MeshNormalMaterial
 
@@ -135,10 +135,17 @@ First, you should create a `loader`. Three.js has built-in function `TextureLoad
 
 ```js
 const loader = new THREE.TextureLoader()
-texture.load('/path/to/the/image')
+texture = loader.load('/path/to/the/image')
 ```
 
 Then set the map property of the material to this texture. That's it, you applied a texture to the plane geometry.
+
+```js
+const geometry = new THREE.PlaneGeometry(2, 2)
+const material = new THREE.MeshSandardMaterial({
+  map: texture,
+})
+```
 
 Textures have settings for repeating, offsetting, and rotating a texture. By default textures in three.js do not repeat. To set whether a texture repeats there are 2 properties, `wrapS` for horizontal wrapping and `wrapT` for vertical wrapping. And set the repeating mode to `THREE.ReaptWrapping`.
 
@@ -165,11 +172,20 @@ texture.repeat.set(timesToRepeatHorizontally, timesToRepeatVertically)
 
 ![checker-board]()
 
-### Adding depth to the scene
+### Texture mapping
+
+## The base color map
+
+It is the basic colored image you add to the object to the texture. With `base color map` we add colors to the surface.
+
+```js
+const textureMap = new THREE.TextureLoader().load('/path/to/texture-map')
+material.map = textureMap
+```
 
 You can add the effect of depth using a `bump map` or `normal map` or `distance map`.
 
-## Using `bump map`
+## `bump map`
 
 A bump map is a grayscale image, where the intensity of each pixel determines the height. You can just set the material `bumpMap` property to the texture. It adds fine details to the texture.
 
@@ -178,18 +194,18 @@ const textureBumpMap = new THREE.TextureLoader().load('/path/to/bump-map')
 material.bumpMap = textureBumpMap
 ```
 
-## Using `normal maps`
+## `normal maps`
 
-A normal map describes the normal vector for each pixel, which should be used to calculate how light affects the material used in the geometry.
+A normal map describes the normal vector for each pixel, which should be used to calculate how light affects the material used in the geometry. It creates an illlusion of depthness to the flat surface.
 
 ```js
 const textureNormalMap = new THREE.TextureLoader().load('/path/to/normal-map')
 material.normalMap = textureNormalMap
 ```
 
-## Using `displacement map`
+## `displacement map`
 
-While the bump map and the normal map give an illusion of depth, we change the model's shape, with a displacement map based on the information from the texture.
+While the normal map gives an illusion of depth, we change the model's shape, with a displacement map based on the information from the texture.
 
 ```js
 const textureDisplacementMap = new THREE.TextureLoader().load(
@@ -198,6 +214,59 @@ const textureDisplacementMap = new THREE.TextureLoader().load(
 material.displacemetMap = textureDisplacementMap
 ```
 
-You can compare those three effects in this example.
+## `roughness map`
 
-There are some other maps for creating a real-world model in computer graphics. You can learn more [here](http://wiki.polycount.com/wiki/Texture_Types#:~:text=%20Texture%20types%20%201%20Color%20Maps.%20The,for%20fine%20detail%20of%20a%20surface.%20More%20).
+The roughness map defines which areas are rough and that effects the reflection sharpness from the surface.
+
+```js
+const textureRoughnessMap = new THREE.TextureLoader().load(
+  '/path/to/roughness-map'
+)
+material.roughnessMap = textureRoughnessMap
+```
+
+## ambient occlusion map
+
+It highlights the shadow areas of the object. It requires a second set of UVs.
+
+```js
+const textureAmbientOcclusionMap = new THREE.TextureLoader().load(
+  '/path/to/AmbientOcclusion-map'
+)
+material.aoMap = textureAmbientOcclusionMap
+
+// second UV
+mesh.geometry.attributes.uv2 = mesh.geometry.attributes.uv
+```
+
+If you compare the objects with roughness map and ambient occlusion map, you can observe that The shadows are more highlighted after using `aoMap`.
+
+## `metalness map`
+
+It defines how much the material is like a metal.
+
+```js
+const textureMetalnessMap = new THREE.TextureLoader().load(
+  '/path/to/metalness-map'
+)
+material.metalnessMap = textureMetalnessMap
+```
+
+You should add `environment map` to make it look like real metal, to add the reflections of the world.
+
+## `environment map`
+
+It is used to add the surrounding reflections on the objects.
+
+To add `env map` to a object you should first set the target.
+
+```js
+const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(128, {
+  format: THREE.RGBFormat,
+  generateMipMaps: true,
+  minFilter: THREE.LinearMipMapLinearFilter,
+  encoding: THREE.sRGBEncoding
+})
+```
+
+There are some other maps for creating a real-world model in computer graphics. You can learn more [here](http://wiki.polycount.com/wiki/Texture_Types).

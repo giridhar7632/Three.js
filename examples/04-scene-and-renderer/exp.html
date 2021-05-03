@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+          Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      html,
+      body {
+        height: 100vh;
+        width: 100vw;
+      }
+      #threejs-container {
+        position: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script src="../scripts/three.min.js"></script>
+    <script src="../scripts/dat.gui.min.js"></script>
+  </head>
+  <body>
+    <div id="threejs-container"></div>
+    <script type="module">
+
+      const gui = new dat.GUI()
+      // sizes
+      let width = window.innerWidth
+      let height = window.innerHeight
+
+      // scene
+      const scene = new THREE.Scene()
+      scene.background = new THREE.Color(0x262626)
+
+      scene.fog = new THREE.FogExp2(0x262626, 0.1)
+
+      // camera
+      const camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000)
+      camera.position.set(0, 0, 60)
+      const camFolder = gui.addFolder('Camera')
+      camFolder.add(camera.position, 'z').min(10).max(200).step(10)
+      camFolder.open()
+
+      // cube
+      const geometry = new THREE.BoxGeometry(2, 2, 2)
+      const material = new THREE.MeshNormalMaterial()
+
+      for (let i = 0; i < 200; i++) {
+          const mesh = new THREE.Mesh(geometry, material)
+          mesh.position.x = (Math.random() - 0.5) * 100
+          mesh.position.y = (Math.random() - 0.5) * 100
+          mesh.position.z = (Math.random() - 0.5) * 100
+          mesh.updateMatrix()
+          mesh.matrixAutoUpdate = false
+          scene.add(mesh)
+        }
+
+      // responsiveness
+      window.addEventListener('resize', () => {
+        width = window.innerWidth
+        height = window.innerHeight
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer.render(scene, camera)
+      })
+
+      // renderer - anti-aliasing
+      const renderer = new THREE.WebGLRenderer({ antialias: true })
+      renderer.physicallyCorrectLights = true
+      renderer.setSize(width, height)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+      // animation
+      function animate() {
+        requestAnimationFrame(animate)
+
+        renderer.render(scene, camera)
+      }
+
+      // rendering the scene
+      const container = document.querySelector('#threejs-container')
+      container.append(renderer.domElement)
+      renderer.render(scene, camera)
+      animate()
+    </script>
+  </body>
+</html>
