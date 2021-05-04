@@ -170,11 +170,11 @@ const timesToRepeatVertically = 2
 texture.repeat.set(timesToRepeatHorizontally, timesToRepeatVertically)
 ```
 
-![checker-board]()
+![checker-board](./assests/checker-board.png)
 
-### Texture mapping
+## Texture mapping
 
-## The base color map
+## `base color map`
 
 It is the basic colored image you add to the object to the texture. With `base color map` we add colors to the surface.
 
@@ -225,7 +225,7 @@ const textureRoughnessMap = new THREE.TextureLoader().load(
 material.roughnessMap = textureRoughnessMap
 ```
 
-## ambient occlusion map
+## `ambient occlusion map`
 
 It highlights the shadow areas of the object. It requires a second set of UVs.
 
@@ -250,23 +250,6 @@ const textureMetalnessMap = new THREE.TextureLoader().load(
   '/path/to/metalness-map'
 )
 material.metalnessMap = textureMetalnessMap
-```
-
-You should add `environment map` to make it look like real metal, to add the reflections of the world.
-
-## `environment map`
-
-It is used to add the surrounding reflections on the objects.
-
-To add `env map` to a object you should first set the target.
-
-```js
-const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(128, {
-  format: THREE.RGBFormat,
-  generateMipMaps: true,
-  minFilter: THREE.LinearMipMapLinearFilter,
-  encoding: THREE.sRGBEncoding
-})
 ```
 
 There are some other maps for creating a real-world model in computer graphics. You can learn more [here](http://wiki.polycount.com/wiki/Texture_Types).
