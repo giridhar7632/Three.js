@@ -150,14 +150,17 @@
       scene.add(object5)
       console.log(object5)
 
+      // for env maps
       const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(128, {
         format: THREE.RGBFormat,
         generateMipMaps: true,
-        minFilter: THREE.LinearMipMapLinearFilter,
+        minFilter: THREE.LinearMipmapLinearFilter,
         encoding: THREE.sRGBEncoding
       })
 
       const cubeCamera = new THREE.CubeCamera(1, 10000, cubeRenderTarget)
+      cubeCamera.position.set(0, 100, 0)
+      scene.add(cubeCamera)
 
       // metallic map
       const material6 = new THREE.MeshStandardMaterial({
@@ -178,9 +181,10 @@
       object6.position.set(2.5, -1.5, 0)
       object6.geometry.attributes.uv2 = object6.geometry.attributes.uv
       object6.castShadow = true
-      object6.add(cubeCamera)
       scene.add(object6)
       console.log(object6)
+
+      cubeCamera.position.copy(object6.position)
 
       // responsiveness
       window.addEventListener('resize', () => {
@@ -212,7 +216,7 @@
           i.rotation.y += 0.01
         })
         controls.update()
-        cubeCamera.update(renderer, scene)
+        cubeCamera.updateCubeMap(renderer, scene)
 
         renderer.render(scene, camera)
       }
