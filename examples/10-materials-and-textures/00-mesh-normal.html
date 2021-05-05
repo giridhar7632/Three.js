@@ -26,11 +26,11 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
-    <script src="https://threejs.org/examples/jsm/controls/OrbitControls.js"></script>
   </head>
   <body>
     <div id="threejs-container"></div>
     <script type="module">
+      import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js"
       const gui = new dat.GUI()
 
       // width, height
@@ -73,7 +73,7 @@
       const renderer = new THREE.WebGL1Renderer()
       renderer.setSize(width, height)
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-      const controls = new THREE.OrbitControls(camera, renderer.domElement)
+      const controls = new OrbitControls(camera, renderer.domElement)
 
       // animation
       function animate() {

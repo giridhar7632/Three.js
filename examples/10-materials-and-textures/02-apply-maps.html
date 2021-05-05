@@ -26,11 +26,11 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
-    <script src="https://threejs.org/examples/jsm/controls/OrbitControls.js"></script>
   </head>
   <body>
     <div id="threejs-container"></div>
     <script type="module">
+      import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js"
       // sizes
       let width = window.innerWidth
       let height = window.innerHeight
@@ -58,12 +58,12 @@
 
       // textures
       const loader = new THREE.TextureLoader()
-      const texture = loader.load('../../assests/basecolor.jpg')
-      const normalmap = loader.load('../../assests/normal.jpg')
-      const heightmap = loader.load('../../assests/height.png')
-      const roughmap = loader.load('../../assests/roughness.jpg')
-      const ambientOcclusionmap = loader.load('../../assests/ambientOcclusion.jpg')
-      const metallicmap = loader.load('../../assests/metallic.jpg')
+      const texture = loader.load('https://cloud-nfpbfxp6x-hack-club-bot.vercel.app/5basecolor.jpg')
+      const normalmap = loader.load('https://cloud-nfpbfxp6x-hack-club-bot.vercel.app/2normal.jpg')
+      const heightmap = loader.load('https://cloud-nfpbfxp6x-hack-club-bot.vercel.app/0height.png')
+      const roughmap = loader.load('https://cloud-nfpbfxp6x-hack-club-bot.vercel.app/3roughness.jpg')
+      const ambientOcclusionmap = loader.load('https://cloud-nfpbfxp6x-hack-club-bot.vercel.app/4ambientocclusion.jpg')
+      const metallicmap = loader.load('https://cloud-nfpbfxp6x-hack-club-bot.vercel.app/1metallic.jpg')
 
       // plane
       const planeGeometry = new THREE.PlaneGeometry(100, 100)
@@ -203,7 +203,7 @@
       renderer.setSize(width, height)
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-      const controls = new THREE.OrbitControls(camera, renderer.domElement)
+      const controls = new OrbitControls(camera, renderer.domElement)
 
       // animation
       function animate() {
@@ -216,7 +216,7 @@
           i.rotation.y += 0.01
         })
         controls.update()
-        cubeCamera.updateCubeMap(renderer, scene)
+        cubeCamera.update(renderer, scene)
 
         renderer.render(scene, camera)
       }

@@ -31,7 +31,6 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
-    <script src="https://threejs.org/examples/jsm/controls/OrbitControls.js"></script>
   </head>
   <body>
     <canvas id="threejs-container"></canvas>
@@ -43,6 +42,8 @@
     <script type="module">
       // Three.js - Cameras - Prespective 2 views
       // from https://threejsfundamentals.org/threejs/threejs-cameras-prespective-2-scenes.html
+
+      import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js"
 
       function main() {
         const canvas = document.querySelector('#threejs-container')
@@ -88,7 +89,7 @@
         gui.add(minMaxGUIHelper, 'min', 0.1, 50, 0.1).name('near')
         gui.add(minMaxGUIHelper, 'max', 0.1, 50, 0.1).name('far')
 
-        const controls = new THREE.OrbitControls(camera, view1Elem)
+        const controls = new OrbitControls(camera, view1Elem)
         controls.target.set(0, 5, 0)
         controls.update()
 
@@ -101,7 +102,7 @@
         camera2.position.set(40, 10, 30)
         camera2.lookAt(0, 5, 0)
 
-        const controls2 = new THREE.OrbitControls(camera2, view2Elem)
+        const controls2 = new OrbitControls(camera2, view2Elem)
         controls2.target.set(0, 5, 0)
         controls2.update()
 

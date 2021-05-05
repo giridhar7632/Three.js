@@ -26,18 +26,19 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
-    <script src="https://threejs.org/examples/jsm/controls/OrbitControls.js"></script>
+    
   </head>
   <body>
     <div id="container"></div>
     <script type="module">
+      import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js"
       // controls
       const gui = new dat.GUI()
       console.log('start')
 
       // sizes
-      const width = window.innerWidth
-      const height = window.innerHeight
+      let width = window.innerWidth
+      let height = window.innerHeight
 
       // scene
       const scene = new THREE.Scene()
@@ -108,7 +109,7 @@
       camFolder.add(camera.position, 'z', 10, 80, 1)
       camFolder.open()
 
-      const controls = new THREE.OrbitControls(camera, renderer.domElement)
+      const controls = new OrbitControls(camera, renderer.domElement)
       controls.autoRotate = true
 
       const ocFolder = gui.addFolder('Orbit Controls')
@@ -122,6 +123,8 @@
 
       // responsiveness
       window.addEventListener('resize', () => {
+        width = window.innerWidth
+        height = window.innerHeight
         camera.aspect = width / height
         camera.updateProjectionMatrix()
 

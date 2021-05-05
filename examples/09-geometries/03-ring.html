@@ -61,7 +61,8 @@
       const geometry = new THREE.RingGeometry()
       const material = new THREE.MeshBasicMaterial({
         color: 0xffffff,
-        wireframe: true
+        wireframe: true,
+        side: THREE.DoubleSide
       })
 
       const materialFolder = gui.addFolder('Material')

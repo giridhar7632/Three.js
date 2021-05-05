@@ -63,7 +63,8 @@
       const geometry = new THREE.PlaneGeometry(1, 1)
       const material = new THREE.MeshBasicMaterial({
         color: 0xffffff,
-        wireframe: true
+        wireframe: true,
+        side: THREE.DoubleSide
       })
 
       const materialFolder = gui.addFolder('Material')

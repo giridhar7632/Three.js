@@ -24,8 +24,8 @@
         height: 100%;
       }
     </style>
-    <script src="../scripts/three.min.js"></script>
-    <script src="../scripts/dat.gui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
   </head>
   <body>
     <div id="threejs-container"></div>
@@ -34,20 +34,33 @@
       let width = window.innerWidth
       let height = window.innerHeight
 
+      const gui = new dat.GUI()
+
       // scene
       const scene = new THREE.Scene()
       scene.background = new THREE.Color(0x262626)
 
       // camera
-      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000)
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
       camera.position.set(0, 0, 50)
       camera.lookAt(0, 0, 0)
+      const camFolder = gui.addFolder('Camera')
+      camFolder.add(camera.position, 'z', 10, 100)
+      camFolder.open()
 
       // Line
       const points = []
       points.push(new THREE.Vector3(-10, 0, 0))
       points.push(new THREE.Vector3(0, -20, 0))
       points.push(new THREE.Vector3(10, 0, 0))
+
+      const folders = [gui.addFolder('Poin 1'), gui.addFolder('Poin 2'), gui.addFolder('Poin 3')]
+      folders.forEach((folder, i) => {
+        folder.add(points[i], 'x', -30, 30, 1).onChange(redraw)
+        folder.add(points[i], 'y', -30, 30, 1).onChange(redraw)
+        folder.add(points[i], 'z', -30, 30, 1).onChange(redraw)
+        folder.open()
+      })
 
       const geometry = new THREE.BufferGeometry().setFromPoints(points)
       const material = new THREE.LineDashedMaterial({
@@ -57,10 +70,18 @@
         dashSize: 3,
         gapSize: 2
       })
+
       const line = new THREE.Line(geometry, material)
       line.computeLineDistances()
       line.position.set(0, 10, 0)
       scene.add(line)
+
+      console.log(line)
+      function redraw() {
+        let newGeometry = new THREE.BufferGeometry().setFromPoints(points)
+        line.geometry.dispose()
+        line.geometry = newGeometry
+      }
 
       // responsiveness
       window.addEventListener('resize', () => {
