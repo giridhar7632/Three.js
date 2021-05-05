@@ -126,6 +126,4 @@ controls.addEventListener('unlock', function () {
 })
 ```
 
-This is a simple 3D game created using PointerLock controls.
-
 We have seen the most useful controls in this chapter. Some developers are creating more useful controls for Three.js. You can see some other controls [here](https://github.com/mrdoob/three.js/blob/master/examples/js/controls) well documented and easy to use.

@@ -39,7 +39,7 @@
       scene.background = new THREE.Color(0x262626)
 
       // camera
-      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
+      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000)
       camera.position.set(0, 0, 50)
       camera.lookAt(0, 0, 0)
 
@@ -52,12 +52,13 @@
       const geometry = new THREE.BufferGeometry().setFromPoints(points)
       const material = new THREE.LineDashedMaterial({
         color: 0xffffff,
-        linewidth: 1,
+        linewidth: 2,
         scale: 1,
         dashSize: 3,
         gapSize: 2
       })
       const line = new THREE.Line(geometry, material)
+      line.computeLineDistances()
       line.position.set(0, 10, 0)
       scene.add(line)
 

@@ -24,8 +24,8 @@
         height: 100%;
       }
     </style>
-    <script src="../scripts/three.min.js"></script>
-    <script src="../scripts/dat.gui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
   </head>
   <body>
     <div id="threejs-container"></div>
@@ -68,7 +68,9 @@
       }
 
       async function doit() {
-        const font = await loadFont('../scripts/fonts/helvetiker_regular.typeface.json')
+        const font = await loadFont(
+          'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json'
+        )
 
         let text = 'Hello World !'
         const geometry = new THREE.TextGeometry(text, {
@@ -170,7 +172,6 @@
       renderer.setSize(width, height)
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-      let step = 0
       // animation
       function animate() {
         requestAnimationFrame(animate)

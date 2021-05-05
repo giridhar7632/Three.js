@@ -1,162 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Three.js - Trackball Controls</title>
+    <title>Three.js - Trackball controls</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      }
-      html,
       body {
-        height: 100vh;
-        width: 100vw;
+        background-color: #ccc;
+        color: #000;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+          Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       }
-      #threejs-container {
-        position: block;
+      a {
+        color: #f00;
+      }
+      #info {
+        position: absolute;
+        top: 0px;
         width: 100%;
-        height: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: none;
+        z-index: 1; /* TODO Solve this in HTML */
+      }
+
+      a,
+      button,
+      input,
+      select {
+        pointer-events: auto;
       }
     </style>
-    <script src="../scripts/three.min.js"></script>
-    <script src="../scripts/dat.gui.min.js"></script>
-    <script src="../scripts/controls/TrackballControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+    <script src="http://mrdoob.github.io/stats.js/build/stats.min.js"></script>
   </head>
   <body>
-    <div id="container"></div>
+    <div id="info">
+      <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - trackball
+      controls<br />
+      MOVE mouse &amp; press LEFT/A: rotate, MIDDLE/S: zoom, RIGHT/D: pan
+    </div>
+
     <script type="module">
-      // controls
-      const gui = new dat.GUI()
-      console.log('start')
+      import { TrackballControls } from 'https://threejs.org/examples/jsm/controls/TrackballControls.js'
 
-      // sizes
-      const width = window.innerWidth
-      const height = window.innerHeight
+      let perspectiveCamera, orthographicCamera, controls, scene, renderer, stats
 
-      // scene
-      const scene = new THREE.Scene()
-      scene.background = new THREE.Color(0x262626)
-      console.log(scene.children)
+      const params = {
+        orthographicCamera: false
+      }
 
-      // renderer
-      const renderer = new THREE.WebGL1Renderer()
-      renderer.setSize(window.innerWidth, window.innerHeight)
-      renderer.shadowMap.enabled = true
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      const frustumSize = 400
 
-      // lights
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
-      scene.add(ambientLight)
+      init()
+      animate()
 
-      const light = new THREE.PointLight(0xffffff, 0.5)
-      light.position.set(0, 10, 10)
+      function init() {
+        const aspect = window.innerWidth / window.innerHeight
 
-      // for shadow
-      light.castShadow = true
-      light.shadow.mapSize.width = 1024
-      light.shadow.mapSize.height = 1024
-      light.shadow.camera.near = 0.5
-      light.shadow.camera.far = 100
-      scene.add(light)
+        perspectiveCamera = new THREE.PerspectiveCamera(60, aspect, 1, 1000)
+        perspectiveCamera.position.z = 500
 
-      // axes
-      const axesHelper = new THREE.AxesHelper(20)
-      scene.add(axesHelper)
+        orthographicCamera = new THREE.OrthographicCamera(
+          (frustumSize * aspect) / -2,
+          (frustumSize * aspect) / 2,
+          frustumSize / 2,
+          frustumSize / -2,
+          1,
+          1000
+        )
+        orthographicCamera.position.z = 500
 
-      // plane
-      const planeGeometry = new THREE.PlaneGeometry(1000, 1000)
-      const plane = new THREE.Mesh(
-        planeGeometry,
-        new THREE.MeshPhongMaterial({ color: 0xffffff, side: THREE.DoubleSide })
-      )
-      plane.rotateX(-Math.PI / 2)
-      plane.position.y = -1.75
-      plane.receiveShadow = true
-      scene.add(plane)
+        // world
 
-      // cube
-      console.log('cube')
-      const geometry = new THREE.BoxGeometry(2, 2, 2)
-      const matArray = [
-        new THREE.MeshPhongMaterial({ color: 0xff8b8b }),
-        new THREE.MeshPhongMaterial({ color: 0xf5ffa2 }),
-        new THREE.MeshPhongMaterial({ color: 0xb5dccd }),
-        new THREE.MeshPhongMaterial({ color: 0xaaffa2 }),
-        new THREE.MeshPhongMaterial({ color: 0x9fd1ff }),
-        new THREE.MeshPhongMaterial({ color: 0xffaef7 }),
-      ]
+        scene = new THREE.Scene()
+        scene.background = new THREE.Color(0xcccccc)
+        scene.fog = new THREE.FogExp2(0xcccccc, 0.002)
 
-      const cube = new THREE.Mesh(geometry, matArray)
-      cube.position.set(0, 0.5, 0)
-      cube.rotateX(Math.PI / 6)
-      cube.castShadow = true
-      cube.receiveShadow = true
-      scene.add(cube)
+        const geometry = new THREE.CylinderGeometry(0, 10, 30, 4, 1)
+        const material = new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true })
 
-      // camera
-      const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000)
-      camera.position.z = 10
-      camera.lookAt(cube.position)
-      const camFolder = gui.addFolder('Camera')
-      camFolder.add(camera.position, 'z', 10, 80, 1)
-      camFolder.open()
+        for (let i = 0; i < 500; i++) {
+          const mesh = new THREE.Mesh(geometry, material)
+          mesh.position.x = (Math.random() - 0.5) * 1000
+          mesh.position.y = (Math.random() - 0.5) * 1000
+          mesh.position.z = (Math.random() - 0.5) * 1000
+          mesh.updateMatrix()
+          mesh.matrixAutoUpdate = false
+          scene.add(mesh)
+        }
 
-      const controls = new THREE.TrackballControls(camera, renderer.domElement)
-      controls.rotateSpeed = 1.0
-      controls.zoomSpeed = 1.0
-      controls.panSpeed = 1.0
-      controls.keys = [65, 83, 68]
+        // lights
 
-      // Events
-      //controls.addEventListener('change', () => console.log('Controls Change'))
-      //controls.addEventListener('start', () => console.log('Controls Start Event') )
-      //controls.addEventListener('end', () => console.log('Controls End Event'))
+        const dirLight1 = new THREE.DirectionalLight(0xffffff)
+        dirLight1.position.set(1, 1, 1)
+        scene.add(dirLight1)
 
-      // properties
-      const ocFolder = gui.addFolder('Trackball Controls')
-      ocFolder.add(controls, 'enabled')
-      ocFolder.add(controls, 'noRotate')
-      ocFolder.add(controls, 'rotateSpeed', 1, 100, 1)
-      ocFolder.add(controls, 'noZoom')
-      ocFolder.add(controls, 'zoomSpeed', 1, 100, 0.1)
-      ocFolder.add(controls, 'noPan')
-      ocFolder.add(controls, 'panSpeed', 0, 100, 0.1)
-      ocFolder.open()
+        const dirLight2 = new THREE.DirectionalLight(0x002288)
+        dirLight2.position.set(-1, -1, -1)
+        scene.add(dirLight2)
 
-      // responsiveness
-      window.addEventListener('resize', () => {
-        camera.aspect = width / height
-        camera.updateProjectionMatrix()
+        const ambientLight = new THREE.AmbientLight(0x222222)
+        scene.add(ambientLight)
+
+        // renderer
+
+        renderer = new THREE.WebGLRenderer({ antialias: true })
+        renderer.setPixelRatio(window.devicePixelRatio)
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        document.body.appendChild(renderer.domElement)
+
+        stats = new Stats()
+        document.body.appendChild(stats.dom)
+
+        //
+
+        const gui = new dat.GUI()
+        gui
+          .add(params, 'orthographicCamera')
+          .name('use orthographic')
+          .onChange(function (value) {
+            controls.dispose()
+
+            createControls(value ? orthographicCamera : perspectiveCamera)
+          })
+
+        //
+
+        window.addEventListener('resize', onWindowResize)
+
+        createControls(perspectiveCamera)
+      }
+
+      function createControls(camera) {
+        controls = new TrackballControls(camera, renderer.domElement)
+
+        controls.rotateSpeed = 1.0
+        controls.zoomSpeed = 1.2
+        controls.panSpeed = 0.8
+
+        controls.keys = ['KeyA', 'KeyS', 'KeyD']
+      }
+
+      function onWindowResize() {
+        const aspect = window.innerWidth / window.innerHeight
+
+        perspectiveCamera.aspect = aspect
+        perspectiveCamera.updateProjectionMatrix()
+
+        orthographicCamera.left = (-frustumSize * aspect) / 2
+        orthographicCamera.right = (frustumSize * aspect) / 2
+        orthographicCamera.top = frustumSize / 2
+        orthographicCamera.bottom = -frustumSize / 2
+        orthographicCamera.updateProjectionMatrix()
 
         renderer.setSize(window.innerWidth, window.innerHeight)
-        renderer.render(scene, camera)
-      })
 
-      // animation
+        controls.handleResize()
+      }
+
       function animate() {
         requestAnimationFrame(animate)
 
-        //cube.rotation.x += 0.005
-        //cube.rotation.y += 0.01
-
         controls.update()
+
+        stats.update()
+
+        render()
+      }
+
+      function render() {
+        const camera = params.orthographicCamera ? orthographicCamera : perspectiveCamera
 
         renderer.render(scene, camera)
       }
-
-      // rendering the scene
-      const container = document.querySelector('#container')
-      container.append(renderer.domElement)
-      renderer.render(scene, camera)
-      animate()
-      console.log(scene.children)
     </script>
   </body>
 </html>
