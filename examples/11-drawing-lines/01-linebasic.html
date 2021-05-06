@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Three.js</title>
+    <title>Three.js - Line basic</title>
     <style>
       * {
         margin: 0;
@@ -30,11 +30,15 @@
   <body>
     <div id="threejs-container"></div>
     <script type="module">
+      // Creating a line using LineBasicMaterial
+      
+      // GUI
+      const gui = new dat.GUI()
+
       // sizes
       let width = window.innerWidth
       let height = window.innerHeight
 
-      const gui = new dat.GUI()
       // scene
       const scene = new THREE.Scene()
       scene.background = new THREE.Color(0x262626)

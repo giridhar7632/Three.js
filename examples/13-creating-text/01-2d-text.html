@@ -30,12 +30,16 @@
   <body>
     <div id="threejs-container"></div>
     <script type="module">
+      // Adding 2d text to Three.js scene
+      // Writing on canvas and then adding the canvas as a texture to material
+
+      // GUI
+      const gui = new dat.GUI()
+      
       // sizes
       let width = window.innerWidth
       let height = window.innerHeight
       const size = 256
-
-      const gui = new dat.GUI()
 
       const container = document.querySelector('#threejs-container')
       const canvas = document.createElement('canvas'),

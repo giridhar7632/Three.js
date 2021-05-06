@@ -31,6 +31,9 @@
   <body>
     <div id="container"></div>
     <script type="module">
+      // Adding orbit controls to Three.js application
+      // In this example, autorotate is set to true, so the camera rotates around the cube 
+
       import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js"
       // controls
       const gui = new dat.GUI()
@@ -67,6 +70,25 @@
       light.shadow.camera.far = 100
       scene.add(light)
 
+      // camera
+      const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000)
+      camera.position.set(0, 0, 10)
+      const camFolder = gui.addFolder('Camera')
+      camFolder.add(camera.position, 'z', 10, 80, 1)
+      camFolder.open()
+
+      const controls = new OrbitControls(camera, renderer.domElement)
+      controls.autoRotate = true
+
+      const ocFolder = gui.addFolder('Orbit Controls')
+      ocFolder.add(controls, 'enabled')
+      ocFolder.add(controls, 'enableZoom')
+      ocFolder.add(controls, 'enableRotate')
+      ocFolder.add(controls, 'enablePan')
+      ocFolder.add(controls, 'autoRotate')
+      ocFolder.add(controls, 'autoRotateSpeed', 1, 100, 1)
+      ocFolder.open()
+
       // axes
       const axesHelper = new THREE.AxesHelper(20)
       scene.add(axesHelper)
@@ -99,27 +121,8 @@
       cube.rotateX(Math.PI / 6)
       cube.castShadow = true
       cube.receiveShadow = true
+      camera.lookAt(cube.position)
       scene.add(cube)
-
-      // camera
-      const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000)
-      camera.position.set(0, 0, 10)
-      //camera.lookAt(cube.position)
-      const camFolder = gui.addFolder('Camera')
-      camFolder.add(camera.position, 'z', 10, 80, 1)
-      camFolder.open()
-
-      const controls = new OrbitControls(camera, renderer.domElement)
-      controls.autoRotate = true
-
-      const ocFolder = gui.addFolder('Orbit Controls')
-      ocFolder.add(controls, 'enabled')
-      ocFolder.add(controls, 'enableZoom')
-      ocFolder.add(controls, 'enableRotate')
-      ocFolder.add(controls, 'enablePan')
-      ocFolder.add(controls, 'autoRotate')
-      ocFolder.add(controls, 'autoRotateSpeed', 1, 100, 1)
-      ocFolder.open()
 
       // responsiveness
       window.addEventListener('resize', () => {
